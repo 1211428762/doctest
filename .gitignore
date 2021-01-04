@@ -1,26 +1,24 @@
-.DS_Store
 node_modules
-/dist
-/dist-*
-
-
-
-# local env files
-.env.local
-.env.*.local
-
-# Log files
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
-pnpm-debug.log*
-
-# Editor directories and files
+.DS_Store
+npm-debug.log
+yarn-debug.log
+yarn-error.log
+lerna-debug.log
+npm-debug.log.*
+yarn-debug.log.*
+yarn-error.log.*
+lerna-debug.log.*
+lib
 .idea
 .vscode
-*.suo
-*.ntvs*
-*.njsproj
-*.sln
-*.sw?
-*.zip
+examples/element-ui
+examples/pages/en-US
+examples/pages/zh-CN
+examples/pages/es
+examples/pages/fr-FR
+fe.element/element-ui
+.npmrc
+coverage
+waiter.config.js
+build/bin/algolia-key.js
+.envrc
