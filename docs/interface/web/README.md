@@ -20,3 +20,46 @@
 :::
 
 :tada :100
+
+<FlowChat-index :nodeItemList="nodeItemList"></FlowChat-index>
+<script>
+    export default{
+        data() {
+            return{
+                nodeItemList: [
+        {
+          meta: {
+            label: '开始',
+            name: '开始',
+            type: 'start',
+          },
+        },
+        {
+          meta: {
+            label: '结束',
+            name: '结束',
+            type: 'end',
+            shape: 'ellipse',
+          },
+        },
+        {
+          meta: {
+            label: '任务',
+            name: '任务',
+            type: 'task',
+            shape: 'diamond',
+          },
+        },
+        {
+          meta: {
+            label: '完成',
+            name: '完成',
+            type: 'finish',
+            shape: 'circle',
+          },
+        },
+      ],
+            }
+        }
+    }
+    </script>

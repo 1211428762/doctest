@@ -10,7 +10,7 @@ module.exports = {
       {
         text: '首页', link: "/"
       },
-      { text: '指南', link: '/guide/' },
+      { text: '指南', link: '/guide/', items: [{ text: 'test', link: '/test/' }] },
       {
         text: '接口', items: [
           { text: '网站', link: '/interface/web/' }
@@ -19,8 +19,12 @@ module.exports = {
     ],
     sidebar: {
       "/guide/": ["/guide/", {
-        title: "侧边栏下拉框1",
+        title: "表单组件",
         children: ['/guide/test', "/guide/test2"]
+      }],
+      "/test/": ["/test/", {
+        title: "测试",
+        children: ['/test/subtest']
       }],
       "/interface/": ['/interface/', {
         title: "侧边栏下拉框22",
