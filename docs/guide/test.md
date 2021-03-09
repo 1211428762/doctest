@@ -209,22 +209,19 @@
       ref="formList"
       :fieldList="formItem"
     >
-      <!-- 输入框的Prefix 插槽 -->
-      <template #testPrefix>
-        <div>输入框的Prefix 插槽</div>
-      </template>
-
-      <!-- 输入框的Suffix 插槽 -->
-      <template #testSuffix>
-        <div>输入框的Suffix 插槽</div>
-      </template>
-
       <!-- 普通插槽 -->
       <!-- 原templateData写法, 现在不用在父组件定义,使用插槽即可, 用法与之前相同 -->
       <template #testSlot="{ templateData }">
         <el-input v-model="templateData.testSlot"></el-input>
       </template>
-
+      <!-- 输入框的Prefix 插槽 -->
+      <template #testPrefix>
+        <div>输入框的Prefix 插槽</div>
+      </template>
+      <!-- 输入框的Suffix 插槽 -->
+      <template #testSuffix>
+        <div>输入框的Suffix 插槽</div>
+      </template>
       <!-- 原生el-form-item -->
       <template #testNativeSlot="{ templateData }">
         <el-form-item
@@ -238,12 +235,14 @@
 
       <template #footer>
         <el-button @click="submit"> 提交 </el-button>
+        <el-button @click="submit"> 返回 </el-button>
       </template>
     </FormList>
+    <el-button @click="getSelect">获取异步数据</el-button>
   </div>
 </template>
 <script>
-import FormList from "@/components/FormList";
+import FormList from "./index";
 export default {
   components: {
     FormList,
@@ -255,7 +254,7 @@ export default {
       //   testSlot: "",
       //   testNativeSlot: "",
       // },
-      elForm: null, //表单组件表格 实例, 方便调用 resetField 等方法
+      elForm: {}, //表单组件表格 示例, 方便调用 resetField 等方法
       formItem: [
         {
           type: "input",
@@ -281,7 +280,7 @@ export default {
           ],
           rules: [{ required: true }],
         },
-        // TODO多个多选框时有bug.多个时, 建议使用插槽方式
+        // TODO多个多选框时有bug,多个时, 可以使用插槽方式
         {
           type: "checkbox",
           prop: "testCheckbox",
@@ -308,9 +307,9 @@ export default {
           ],
         },
         {
-          type: "switch",
-          label: "测试switch",
-          prop: "testSwitch",
+          type: "icon",
+          label: "图标",
+          prop: "testIcon",
         },
         {
           type: "date",
@@ -332,35 +331,37 @@ export default {
       ],
     };
   },
-  created() {
-    // 异步的select
-    this.formItem.filter((cur) => {
-      if (cur.prop === "ayncSelect") {
-        // cur.list=[]  等于对应值
-      }
-    });
-  },
+
   methods: {
+    getSelect() {
+      // 异步的select
+      this.formItem.filter((cur) => {
+        if (cur.prop === "ayncSelect") {
+          cur.list = [
+            {
+              label: "选项一",
+              value: 1,
+            }, {
+              label: "选项二",
+              value: 2,
+            },
+          ];
+        }
+      });
+    },
     submit() {
-      //传入回调函数 ,参数是 表单的值
-      //比如 表单校验成功, 要做些什么 ,
-      let doSomeThing = (form) => {
-        //这里可以拿到form,虽然代码在子组件执行, 但this仍指向父组件的实例
-        console.log(form, this.formItem);
-      };
-      // 上个版本,校验成功 ,formList 组件 会向 父组件发出 成功的回调 get-form,需要多定义一个函数去接,繁琐
-      this.$refs.formList.submitForm(doSomeThing);
+      this.$refs.formList.submitForm((form) => {
+        // 通过表单校验后,执行, form为表单数据
+      });
     },
     handleEvent(type, val, key) {
-      switch (
-        type
-        // xxxx
-      ) {
+      switch (type) {
       }
     },
   },
 };
 </script>
+
 
 ```
 

@@ -1,1 +1,1 @@
-<FlowChat-index></FLowChat-index>
+<FlowChart-index></FlowChart-index>

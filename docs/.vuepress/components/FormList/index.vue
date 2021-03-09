@@ -34,7 +34,8 @@
             "
             v-model="transfer[item.prop]"
             :type="item.type === 'input' ? 'text' : item.type"
-            clearable
+            :clearable="item.type !== 'password'"
+            :show-password="item.type === 'password'"
             :disabled="exhibit || item.disabled"
             :placeholder="item.placeholder || getPlaceholder(item)"
             @focus="handleEvent(item.type, transfer[item.prop], item.prop)"
@@ -235,7 +236,7 @@ export default {
     // label宽度
     labelWidth: {
       type: String,
-      default: "130px",
+      default: "90px",
     },
     elForm: {
       type: Object,
@@ -308,7 +309,7 @@ export default {
         switch (cur.type) {
           case "radio":
             obj[cur.prop] = cur.list[0].value;
-            console.log(122121);
+
             break;
           default:
             break;

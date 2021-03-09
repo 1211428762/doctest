@@ -128,18 +128,29 @@ export default {
       ],
     };
   },
-  created() {
-    // 异步的select
-    this.formItem.filter((cur) => {
-      if (cur.prop === "ayncSelect") {
-        // cur.list=[]  等于对应值
-      }
-    });
-  },
+
   methods: {
+    getSelect() {
+      // 异步的select
+      this.formItem.filter((cur) => {
+        if (cur.prop === "ayncSelect") {
+          cur.list = [
+            {
+              label: "选项一",
+              value: 1,
+            }, {
+              label: "选项二",
+              value: 2,
+            },
+          ];
+        }
+      });
+    },
     submit() {
       this.$refs.formList.submitForm((form) => {
         // 通过表单校验后,执行, form为表单数据
+        this.$message.success("控制台查看表单数据")
+        console.log(form);
       });
     },
     handleEvent(type, val, key) {
