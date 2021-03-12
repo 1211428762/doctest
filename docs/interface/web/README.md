@@ -21,7 +21,7 @@
 
 :tada :100
 
-<FlowChat-index :nodeItemList="nodeItemList"></FlowChat-index>
+<FlowChart-index :nodeItemList="nodeItemList"></FlowChart-index>
 <script>
     export default{
         data() {

@@ -1,5 +1,6 @@
 import ElementUI from 'element-ui';
 import 'element-ui/lib/theme-chalk/index.css';
+import "./styles/common.scss"
 import global from "./components/global"
 export default ({
   Vue, // the version of Vue being used in the VuePress app

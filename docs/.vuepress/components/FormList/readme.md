@@ -11,7 +11,7 @@
 | className  | 可选,表单类名                                           | String  |       |
 | loading    | 可选,表单loading(待改进)                                | Boolean | true  |
 | elForm     | 可选,表单实例, 会在mount后返回给父组件,使用需要带sync   | Object  |       |
-| labelWidth | 可选,表单label 宽, 表单加了 $attr ,可被 label-width替代 | String  | 90px  |
+| labelWidth | 可选,表单label 宽, 表单加了 $attr ,可被 label-width替代 | String  | 100px |
 | xxxx       | 可选,el-form 能带的属性, 全部都能直接传给 该组件        |         |       |
 
 **注:表单数据在提交前, 一直在子组件内, 如果 父组件需要在表单提交前就需要校验,(如两次密码输入是否一致.出现该组件自带功能难以处理的场景.就 传递 formData,实现"父子组件双向绑定" ,表单数据在父组件也可以操作 )**
@@ -20,15 +20,15 @@
 
 ### 表单项
 
-| 参数      | 说明                                                   | 类型    | 可选                                                         |
-| --------- | ------------------------------------------------------ | ------- | ------------------------------------------------------------ |
-| type      | 必填,表单项类型                                             | String  | input/number/select/checkbox/radio/switch/date/slot/nativeSlot |
-| label     | 必填,表单项文字部分                                          | String  |                                                              |
-| prop      | 必填,表单字段名                                             | String  |                                                              |
-| list      | select/checkbox/radio等的子选项                        | Array   | 异步操作时在,created hook赋值                                |
-| className | 表单项类名                                             | String  |                                                              |
-| half      | 表单项长度折半                                         | Boolean |                                                              |
-| xxx       | 不同类型表单项,自带不同的详细属性,详情见element 表单项 | String  | disabled,multiple(多选),maxlength(输入框)等等                |
+| 参数      | 说明                                                   | 类型    | 可选                                                           |
+| --------- | ------------------------------------------------------ | ------- | -------------------------------------------------------------- |
+| type      | 必填,表单项类型                                        | String  | input/number/select/checkbox/radio/switch/date/slot/nativeSlot |
+| label     | 必填,表单项文字部分                                    | String  |                                                                |
+| prop      | 必填,表单字段名                                        | String  |                                                                |
+| list      | select/checkbox/radio等的子选项                        | Array   | 异步操作时在,created hook赋值                                  |
+| className | 表单项类名                                             | String  |                                                                |
+| half      | 表单项长度折半                                         | Boolean |                                                                |
+| xxx       | 不同类型表单项,自带不同的详细属性,详情见element 表单项 | String  | disabled,multiple(多选),maxlength(输入框)等等                  |
 
 ### 事件
 
@@ -48,7 +48,7 @@
 | prop(字段名) + 'Prefix' | 表单项的前插槽, 可理解为 css before |
 | prop(字段名) + 'Suffix' | 表单项的尾插槽,可理解为 css after   |
 
-**注:**可以通过 css兄弟元素 选择器, 控制表单项元素, 实现手风琴效果.还有其他妙用, 如同 css伪元素 ,充满无数可能性
+**注:**如果css伪元素, 自由度较高
 
 ### 示例
 
@@ -194,14 +194,11 @@ export default {
   },
   methods: {
     submit() {
-      //传入回调函数 ,参数是 表单的值
-      //比如 表单校验成功, 要做些什么 ,
-      let doSomeThing = (form) => {
-        //这里可以拿到form,虽然代码在子组件执行, 但this仍指向父组件的实例
-        console.log(form, this.formItem);
-      };
-      // 上个版本,校验成功 ,formList 组件 会向 父组件发出 成功的回调 get-form,需要多定义一个函数去接,繁琐
-      this.$refs.formList.submitForm(doSomeThing);
+    
+      this.$refs.formList.submitForm(form=>{
+        //表单校验成功的回调
+          console.log(form, this.formItem);
+      });
     },
     handleEvent(type, val, key) {
       switch (
@@ -222,6 +219,5 @@ export default {
 
 遇到复杂逻辑, 使用 定义type 为 slot/nativeSlot 提高自由度
 
-业务组件, 表单极具多变性 , 用多了 就习惯了 , 
+业务组件, 表单极具多变性 , 用多了 就习惯了 
 
-成长都是痛苦的蜕变, 技术磨练亦是如此, 

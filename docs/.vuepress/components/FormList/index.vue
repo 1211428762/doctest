@@ -14,9 +14,10 @@
         v-for="(item, index) in fieldList"
         :key="index"
         class="form-item-wrap"
-        :class="item.half ? 'form-item-half' : ''"
+        :class="{ 'form-item-half': item.half }"
       >
         <slot :name="item.prop + 'Prefix'"></slot>
+        <!-- label为inner时, 表示无label,只有placeholder -->
         <el-form-item
           v-if="item.type != 'nativeSlot'"
           :prop="item.prop"
@@ -34,13 +35,12 @@
             "
             v-model="transfer[item.prop]"
             :type="item.type === 'input' ? 'text' : item.type"
-            :clearable="item.type !== 'password'"
-            :show-password="item.type === 'password'"
+            clearable
             :disabled="exhibit || item.disabled"
             :placeholder="item.placeholder || getPlaceholder(item)"
             @focus="handleEvent(item.type, transfer[item.prop], item.prop)"
             :maxlength="item.limit"
-            :show-word-limit="item.limit"
+            :show-word-limit="item.limit ? true : false"
           />
 
           <!-- 文本输入框 -->
@@ -50,10 +50,10 @@
             :type="item.type"
             :disabled="exhibit || item.disabled"
             :placeholder="item.placeholder || getPlaceholder(item)"
-            :autosize="item.autosize || { minRows: 2, maxRows: 10 }"
+            :autosize="item.autosize || { minRows: 3, maxRows: 10 }"
             @focus="handleEvent(item.type, transfer[item.prop], item.prop)"
             :maxlength="item.limit || 200"
-            show-word-limit
+            :show-word-limit="item.limit ? true : false"
           />
           <!-- 计数器 -->
           <el-input-number
@@ -107,10 +107,12 @@
             <el-checkbox
               v-for="(childItem, childIndex) in item.list"
               :key="childIndex"
-              :label="childItem.label"
-              :name="item.prop"
+              :label="childItem.value"
+              :name="childItem.label"
               :disabled="childItem.disabled"
-            ></el-checkbox>
+            >
+              {{ childItem.label }}</el-checkbox
+            >
           </el-checkbox-group>
 
           <!-- 单选框系列 -->
@@ -139,7 +141,7 @@
             :inactive-text="item.inactiveText"
           ></el-switch>
 
-          <!-- 上传 -->
+          <!-- 上传 包含较多逻辑, 当需要时,需要根据实际更改,可以二次开发该组件 -->
           <!-- <upload
           v-if="item.type.includes('upload')"
           :info="item"
@@ -159,35 +161,36 @@
           ></addIcon>
           <!-- solt -->
           <template v-if="item.type === 'slot'">
-            <slot :name="item.prop" v-bind:templateData="transfer" />
+            <slot
+              :class="{ 'form-item-disabled': exhibit }"
+              :name="item.prop"
+              v-bind:templateData="transfer"
+            />
           </template>
-
-          <!-- TODO信息展示框 -->
-          <!-- <el-tag v-if="item.type === 'tag'">
-        {{
-          $fn.getDataName({
-            dataList: listTypeInfo[item.list],
-            value: "value",
-            label: "key",
-            data: form[item.value],
-          }) || "-"
-        }}
-      </el-tag> -->
         </el-form-item>
-
-        <!-- solt -->
-        <template v-if="item.type === 'nativeSlot'">
-          <slot :name="item.prop" v-bind:templateData="transfer" />
-        </template>
+        <!-- 表单项,尾插槽 -->
         <slot :name="item.prop + 'Suffix'"></slot>
+        <!-- 原生插槽solt -->
+        <template v-if="item.type === 'nativeSlot'">
+          <slot
+            :class="{ 'form-item-disabled': exhibit }"
+            :name="item.prop"
+            v-bind:templateData="transfer"
+          />
+        </template>
       </div>
 
-      <slot name="append"> </slot>
+      <slot
+        name="append"
+        :class="{ 'form-item-disabled': exhibit }"
+        v-bind:templateData="transfer"
+      >
+      </slot>
       <div v-if="footer" class="button-wrap">
-        <slot name="footer"
+        <slot name="footer" v-bind:form="transfer"
           ><el-button
             v-if="!exhibit"
-            class="form-submit sea-blue-btn"
+            class="form-submit"
             @click="submitForm(undefined, 'form')"
             :loading="btnLoading"
             >提交</el-button
@@ -202,7 +205,6 @@
 <script>
 import upload from "./upload";
 import addIcon from "./addIcon";
-// 加一个 提交,返回让头部tag关闭,删除头部tag,业务代码,如果后期要抽离组件,需要删除它
 
 export default {
   name: "form-list",
@@ -214,9 +216,10 @@ export default {
       type: String,
       default: "",
     },
-    // 模板表单数据 用作用域插槽替代
-    templateData: {
-      type: Object,
+    // 该变量主要是为了设置默认值,可被label-width取代
+    labelWidth: {
+      type: String,
+      default: "100px",
     },
     // 传这个可以实现 父子组件双向绑定, 无需按钮触发
     formData: {
@@ -226,18 +229,8 @@ export default {
     fieldList: {
       type: Array,
       required: true,
-      default: () => [],
     },
 
-    // 相关的列表
-    listTypeInfo: {
-      type: Object,
-    },
-    // label宽度
-    labelWidth: {
-      type: String,
-      default: "90px",
-    },
     elForm: {
       type: Object,
     },
@@ -256,8 +249,7 @@ export default {
     return {
       transfer: {},
       configList: {},
-      imageUrl: "",
-      name: "file",
+
       testLoading: true,
       btnLoading: false,
     };
@@ -270,20 +262,14 @@ export default {
     }, 300);
     this.init();
     // 加了上传组件建议调用一次
-    this.getConfigList();
+    // this.getConfigList();
   },
   watch: {
-    // DEL 作用域插槽取代
-    templateData: {
-      handler(val) {
-        Object.assign(this.transfer, val);
-      },
-      deep: true,
-    },
     // TODO  当使用slot 时, 且 内部的formItem 绑定 父级 的formData 时 需要动态监听formData,开销略大,
     //父组件使用更便利,  舍弃性能,提高容错率
     formData: {
       handler(val) {
+        // console.log(val);
         this.transfer = val;
       },
       deep: true,
@@ -309,7 +295,12 @@ export default {
         switch (cur.type) {
           case "radio":
             obj[cur.prop] = cur.list[0].value;
-
+            break;
+          case "switch":
+            obj[cur.prop] = false;
+            break;
+          case "checkbox":
+            obj[cur.prop] = [];
             break;
           default:
             break;
@@ -320,26 +311,22 @@ export default {
       if (this.formData) {
         //  TODO 反显数据需要处理的,上传文件,
         this.transfer = this.formData;
-        // console.log(this.formData);
-        // loading
       }
     },
-    // 获取字段列表
-    getConfigList() {
-      const props = this.fieldList.map((cur) => cur.prop); // 所有的字段值value
-      const types = this.fieldList.map((cur) => cur.type); // 所有的字段名 name
-      const obj = {};
-      types.forEach((cur, index) => {
-        obj[cur] = props[index];
-      });
-      this.configList = obj;
-    },
-    format(prop) {
-      // 上传文件需要数组
-      return prop ? Array.from(prop) : [];
-    },
+    //TODO 获取字段列表  待开发
+    // getConfigList() {
+    //   const props = this.fieldList.map((cur) => cur.prop); // 所有的字段值value
+    //   const types = this.fieldList.map((cur) => cur.type); // 所有的字段名 name
+    //   const obj = {};
+    //   types.forEach((cur, index) => {
+    //     obj[cur] = props[index];
+    //   });
+    //   this.configList = obj;
+    // },
+
     // 得到placeholder的显示
     getPlaceholder(row) {
+      console.log(row.type);
       if (this.exhibit) return "-";
       let placeholder;
       if (
@@ -371,13 +358,12 @@ export default {
         default:
           break;
       }
-
       this.$emit("handle-event", type, val, key);
     },
-    // 派发按钮点击事件
-    handleClick(event, data) {
-      this.$emit("handle-click", event, data);
-    },
+    // TODO 派发按钮点击事件 ,待启用
+    // handleClick(event, data) {
+    //   this.$emit("handle-click", event, data);
+    // },
     // 提交
     submitForm(fn = function () {}, formName = "form") {
       this.$refs[formName].validate((valid) => {
@@ -393,21 +379,9 @@ export default {
         }
       });
     },
-    fileSuccess(fileList, field) {
-      // TODO 目前组件里只能放一个 上传组件
-      // const field = this.configList.upload || this.configList.uploadimg;
-
-      this.$nextTick(() => {
-        this.transfer[field] = fileList;
-        // TODO 手动清除 上传文件的判定
-        this.$refs.form.clearValidate(field);
-      });
-    },
 
     cancel() {
-      this.$topDelTag(this);
-
-      this.$emit("cancle");
+      this.$emit("cancel");
     },
 
     // 重置表单
@@ -469,6 +443,9 @@ export default {
 
 // 展示样式
 .form-list.form-exhibit ::v-deep {
+  .el-form-item {
+    pointer-events: none;
+  }
   .el-input__inner,
   .el-textarea__inner {
     border: none !important;
@@ -488,13 +465,22 @@ export default {
   .el-form-item.is-required:not(.is-no-asterisk) > .el-form-item__label:before {
     content: none !important;
   }
+  // checkbox,radio,选项转文字
+  .el-checkbox.is-disabled,
   .el-radio.is-disabled {
     display: none;
   }
+  .el-checkbox.is-checked,
   .el-radio.is-checked {
     display: block;
-    .el-radio__label {
+    .el-radio__label,
+    .el-checkbox__label {
       color: #606266;
+    }
+  }
+  .el-checkbox.is-disabled.is-checked {
+    .el-checkbox__inner {
+      display: none;
     }
   }
   .el-radio__input.is-disabled.is-checked {

@@ -6,7 +6,8 @@
         :fieldList="formItem"
         @handle-event="handleEvent"
       >
-        <template v-show="showSlot" #append="{ templateData }">
+        <template v-if="showSlot" #append="{ templateData }">
+       
           <el-form-item label="年龄">
             <el-input v-model="templateData.age"></el-input>
           </el-form-item>
@@ -66,7 +67,7 @@ export default {
           break;
       }
     },
-    radioCase(val, key) {
+    radioCase(val, key) { 
       if (key === "radio") {
         this.showSlot = val === 0 ? false : true;
       }

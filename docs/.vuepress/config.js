@@ -12,21 +12,22 @@ module.exports = {
       },
       { text: '指南', link: '/guide/', items: [{ text: 'test', link: '/test/' }] },
       {
-        text: '接口', items: [
-          { text: '网站', link: '/interface/web/' }
+        text: '浪漫的程序员', items: [
+          { text: '案例', link: '/interface/web/' }
         ]
-      }
+      },
+      { text: '扩展', link: '/expand/', items: [{ text: 'test', link: '/test/' }] },
     ],
     sidebar: {
       "/guide/": ["/guide/", {
         title: "表单组件",
-        children: ['/guide/test', "/guide/test2"]
+        children: ['/guide/complete', "/guide/case"]
       }],
       "/test/": ["/test/", {
         title: "测试",
         children: ['/test/subtest']
       }],
-      "/interface/": ['/interface/', {
+      "浪漫的程序员": ['/interface/', {
         title: "侧边栏下拉框22",
         children: ['/interface/web/']
       }],
