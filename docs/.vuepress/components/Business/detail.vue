@@ -52,7 +52,6 @@ export default {
       });
     },
     close() {
-     
       this.visible = false;
     },
   },

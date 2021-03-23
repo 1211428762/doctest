@@ -106,11 +106,11 @@
 </template>
 
 <script>
-import Graph from './Graph';
-import GraphMenu from './menu';
-import GraphNode from './node';
-import GraphLine from './link';
-import MarkLine from './markLine';
+import Graph from "./Graph";
+import GraphMenu from "./menu";
+import GraphNode from "./node";
+import GraphLine from "./link";
+import MarkLine from "./markLine";
 
 import {
   getOffset,
@@ -124,10 +124,10 @@ import {
   localOrigin,
   prevOrigin,
   NewCoordinate,
-} from './utils';
+} from "./utils";
 
 export default {
-  name: 'super-flow',
+  name: "super-flow",
   props: {
     draggable: {
       type: Boolean,
@@ -159,7 +159,7 @@ export default {
     },
     markLineColor: {
       type: String,
-      default: '#55abfc',
+      default: "#55abfc",
     },
     origin: {
       type: Array,
@@ -205,8 +205,8 @@ export default {
       originChange: [], // origin变化了多少
       MovePalette: 0,
       isDrag: false,
-      dragStyle: { left: '', top: '' },
-      targetLine: '',
+      dragStyle: { left: "", top: "" },
+      targetLine: "",
       paletteSize: [0, 0],
       graph: new Graph({
         width: this.width,
@@ -250,9 +250,7 @@ export default {
   },
   computed: {
     maskStyle() {
-      const {
-        top, right, bottom, left,
-      } = this.graph.maskBoundingClientRect;
+      const { top, right, bottom, left } = this.graph.maskBoundingClientRect;
 
       return {
         // width: `${right - left}px`,
@@ -262,20 +260,18 @@ export default {
       };
     },
   },
-  created() {
-    localStorage.setItem('CURORIGIN', '0,0');
-    localStorage.setItem('PREVORIGIN', '0,0');
-  },
+  created() {},
   mounted() {
+    this.setOrigin();
     this.initPalette();
     // 实际画板大小,用于限定左右边际
     window.onresize = debounce(this.initPalette, 100);
 
-    document.addEventListener('mouseup', this.docMouseup);
-    document.addEventListener('mousemove', this.docMousemove);
-    this.$once('hook:beforeDestroy', () => {
-      document.removeEventListener('mouseup', this.docMouseup);
-      document.removeEventListener('mousemove', this.docMousemove);
+    document.addEventListener("mouseup", this.docMouseup);
+    document.addEventListener("mousemove", this.docMousemove);
+    this.$once("hook:beforeDestroy", () => {
+      document.removeEventListener("mouseup", this.docMouseup);
+      document.removeEventListener("mousemove", this.docMousemove);
     });
     this.$nextTick(() => {
       this.graph.initNode(this.nodeList);
@@ -283,6 +279,10 @@ export default {
     });
   },
   methods: {
+    setOrigin() {
+      window.localStorage.setItem("CURORIGIN", "0,0");
+      window.localStorage.setItem("PREVORIGIN", "0,0");
+    },
     dragDown(evt) {
       this.isDrag = true;
       const odiv = this.$refs.toDragg;
@@ -327,7 +327,7 @@ export default {
       // this.$set(this.origin, 0, -odiv.offsetLeft);
       // this.$set(this.origin, 1, -odiv.offsetTop);
 
-      localStorage.setItem('CURORIGIN', [-odiv.offsetLeft, -odiv.offsetTop]);
+      localStorage.setItem("CURORIGIN", [-odiv.offsetLeft, -odiv.offsetTop]);
 
       // this.$refs.subMenu.updateOrigin(this.origin);
       // this.$refs.subMenu.prevOrigin(this.originForNode);
@@ -340,7 +340,7 @@ export default {
       console.log(this.graph);
     },
     lineClick(line) {
-      this.$emit('get-tar-link', line);
+      this.$emit("get-tar-link", line);
     },
     // 用于获取画布大小,用于限制图块不溢出边界
     initPalette() {
@@ -352,44 +352,46 @@ export default {
 
     initMenu(menu, source) {
       return menu
-        .map((subList) => subList
-          .map((item) => {
-            let disable;
-            let hidden;
+        .map((subList) =>
+          subList
+            .map((item) => {
+              let disable;
+              let hidden;
 
-            if (isFun(item.disable)) {
-              disable = item.disable(source);
-            } else if (isBool(item.disable)) {
-              disable = item.disable;
-            } else {
-              disable = Boolean(item.disable);
-            }
+              if (isFun(item.disable)) {
+                disable = item.disable(source);
+              } else if (isBool(item.disable)) {
+                disable = item.disable;
+              } else {
+                disable = Boolean(item.disable);
+              }
 
-            if (isFun(item.hidden)) {
-              hidden = item.hidden(source);
-            } else if (isBool(item.hidden)) {
-              hidden = item.hidden;
-            } else {
-              hidden = Boolean(item.hidden);
-            }
+              if (isFun(item.hidden)) {
+                hidden = item.hidden(source);
+              } else if (isBool(item.hidden)) {
+                hidden = item.hidden;
+              } else {
+                hidden = Boolean(item.hidden);
+              }
 
-            return {
-              ...item,
-              disable,
-              hidden,
-            };
-          })
-          .filter((item) => !item.hidden))
+              return {
+                ...item,
+                disable,
+                hidden,
+              };
+            })
+            .filter((item) => !item.hidden)
+        )
         .filter((sublist) => sublist.length);
     },
 
     showContextMenu(position, list, source) {
       if (!list.length) return;
 
-      this.$set(this.menuConf, 'position', position);
-      this.$set(this.menuConf, 'list', list);
-      this.$set(this.menuConf, 'source', source);
-      this.$set(this.menuConf, 'origin', source.origin);
+      this.$set(this.menuConf, "position", position);
+      this.$set(this.menuConf, "list", list);
+      this.$set(this.menuConf, "source", source);
+      this.$set(this.menuConf, "origin", source.origin);
       this.menuConf.visible = true;
     },
 
@@ -411,7 +413,7 @@ export default {
     },
 
     docMousemove(evt) {
-      if (this.MovePalette === '1') {
+      if (this.MovePalette === "1") {
         const a = 1;
         // FIXME选择移动画板时不触发其他事件
         return;
@@ -425,10 +427,10 @@ export default {
       } else if (this.linkEditable) {
         this.graph.dispatch(
           {
-            type: 'mousemove',
+            type: "mousemove",
             evt,
           },
-          true,
+          true
         );
       }
     },
@@ -486,7 +488,7 @@ export default {
     // 改变起点,连线有动画
     moveTemEdge(evt) {
       this.temEdgeConf.link.movePosition = NewCoordinate(
-        getOffset(evt, this.$el),
+        getOffset(evt, this.$el)
       );
     },
 
@@ -498,12 +500,12 @@ export default {
         ]).end;
         arrayReplace(
           this.graph.origin,
-          vector(this.moveAllConf.origin).add(offset).end,
+          vector(this.moveAllConf.origin).add(offset).end
         );
       }
     },
     linkClick() {
-      this.$emit('get-tar-link', this.graph.mouseonLink);
+      this.$emit("get-tar-link", this.graph.mouseonLink);
       // console.log(this.graph.mouseonLink);
     },
     contextmenu(evt) {
@@ -540,14 +542,14 @@ export default {
         arrayReplace(
           verticalList,
           [...new Set(centerList.map((center) => center[0]))].sort(
-            (prev, next) => prev - next,
-          ),
+            (prev, next) => prev - next
+          )
         );
         arrayReplace(
           horizontalList,
           [...new Set(centerList.map((center) => center[1]))].sort(
-            (prev, next) => prev - next,
-          ),
+            (prev, next) => prev - next
+          )
         );
 
         this.moveNodeConf.isMove = true;
@@ -577,16 +579,16 @@ export default {
     nodeContextmenu(evt, node) {
       const list = this.initMenu(this.nodeMenu, node);
       if (!list.length) return;
-      this.$set(this.menuConf, 'position', getOffset(evt, this.$el));
-      this.$set(this.menuConf, 'list', list);
-      this.$set(this.menuConf, 'source', node);
+      this.$set(this.menuConf, "position", getOffset(evt, this.$el));
+      this.$set(this.menuConf, "list", list);
+      this.$set(this.menuConf, "source", node);
       this.menuConf.visible = true;
     },
     // 单击事件
     nodeClick(evt, node) {
       const list = this.initMenu(this.nodeMenu, node);
       // console.log(evt, node);
-      this.$emit('get-tar-node', node);
+      this.$emit("get-tar-node", node);
     },
     // 开始画线
     sideMousedown(evt, node, startAt) {
@@ -596,7 +598,7 @@ export default {
           startAt,
         });
         link.movePosition = NewCoordinate(getOffset(evt, this.$el));
-        this.$set(this.temEdgeConf, 'link', link);
+        this.$set(this.temEdgeConf, "link", link);
         this.temEdgeConf.visible = true;
       }
     },
@@ -629,7 +631,7 @@ export default {
           clientX,
           clientY,
         },
-        this.$el,
+        this.$el
       );
       return vector(offset).minus(this.graph.origin).end;
     },
@@ -640,18 +642,18 @@ export default {
   },
   // FIXME 读懂watch
   watch: {
-    'graph.graphSelected': function () {
+    "graph.graphSelected": function () {
       if (this.graph.graphSelected) {
         this.$nextTick(() => {
           this.$refs.selectAllMask.focus();
         });
       }
     },
-    'graph.mouseonLink': function () {
+    "graph.mouseonLink": function () {
       if (this.graph.mouseonLink) {
-        document.body.style.cursor = 'pointer';
+        document.body.style.cursor = "pointer";
       } else {
-        document.body.style.cursor = '';
+        document.body.style.cursor = "";
       }
     },
     origin() {

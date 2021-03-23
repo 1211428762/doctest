@@ -20,8 +20,9 @@
 :::
 
 :tada :100
-
+<ClientOnly>
 <FlowChart-index :nodeItemList="nodeItemList"></FlowChart-index>
+</ClientOnly>
 <script>
     export default{
         data() {

@@ -15,6 +15,7 @@
         :key="index"
         class="form-item-wrap"
         :class="{ 'form-item-half': item.half }"
+        :style="{ width: item.width }"
       >
         <slot :name="item.prop + 'Prefix'"></slot>
         <!-- label为inner时, 表示无label,只有placeholder -->
