@@ -8,7 +8,7 @@
     </p>
 
     <div class="img-demo">
-      <img src="/img/toggle.gif" alt="" /> <img src="/img/append.gif" alt="" />
+      <img src="img/toggle.gif" alt="" /> <img src="img/append.gif" alt="" />
     </div>
 
     <p>一般来说radio 分为: <b>插入</b> ,<b>切换</b></p>

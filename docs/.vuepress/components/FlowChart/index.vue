@@ -97,12 +97,12 @@
 </template>
 
 <script>
-import iconTag from './iconTag';
-import superFlow from './indexProto';
-import panelLeft from './panelLeft';
+import iconTag from "./iconTag";
+import superFlow from "./indexProto";
+import panelLeft from "./panelLeft";
 
-import panelRight from './panelRight';
-import { deepClone, localOrigin, NewCoordinate } from './utils';
+import panelRight from "./panelRight";
+import { deepClone, localOrigin, NewCoordinate } from "./utils";
 
 const drawerType = {
   node: 0,
@@ -110,7 +110,7 @@ const drawerType = {
 };
 
 export default {
-  name: 'flowChat',
+  name: "flowChat",
   components: {
     iconTag,
     superFlow,
@@ -118,9 +118,42 @@ export default {
     panelRight,
   },
   props: {
+    // 默认值,展示用,后期需要更改
     nodeItemList: {
       type: Array,
-      default: () => [],
+      default: () => [
+        {
+          meta: {
+            label: "开始",
+            name: "开始",
+            type: "start",
+          },
+        },
+        {
+          meta: {
+            label: "结束",
+            name: "结束",
+            type: "end",
+            shape: "ellipse",
+          },
+        },
+        {
+          meta: {
+            label: "任务",
+            name: "任务",
+            type: "task",
+            shape: "diamond",
+          },
+        },
+        {
+          meta: {
+            label: "完成",
+            name: "完成",
+            type: "finish",
+            shape: "circle",
+          },
+        },
+      ],
     },
     linkList: {
       type: Array,
@@ -132,7 +165,7 @@ export default {
     },
     height: {
       type: String,
-      default: '600px',
+      default: "600px",
     },
     // graphMenu: {
     //   type: Array,
@@ -146,12 +179,12 @@ export default {
 
       styleSelection: [],
       curScale: 1,
-      msgSetting: 'node', // 判断现在设置哪个属性
+      msgSetting: "node", // 判断现在设置哪个属性
       // nodeList: [],
       // linkList: [],
       drawerType,
       drawerConf: {
-        title: '',
+        title: "",
         visible: false,
         type: null,
         info: null,
@@ -161,20 +194,22 @@ export default {
           conf.type = type;
           conf.info = info;
           if (conf.type === drawerType.node) {
-            conf.title = '节点';
+            conf.title = "节点";
             // 编辑文字
 
-            if (this.$refs.panelRight.$refs.nodeSetting) this.$refs.panelRight.$refs.nodeSetting.resetFields();
+            if (this.$refs.panelRight.$refs.nodeSetting)
+              this.$refs.panelRight.$refs.nodeSetting.resetFields();
             Object.keys(this.nodeSetting).forEach((key) => {
               this.$set(this.nodeSetting, key, info.meta[key]);
             });
           } else {
-            conf.title = '连线';
-            if (this.$refs.panelRight.$refs.linkSetting) this.$refs.panelRight.$refs.linkSetting.resetFields();
+            conf.title = "连线";
+            if (this.$refs.panelRight.$refs.linkSetting)
+              this.$refs.panelRight.$refs.linkSetting.resetFields();
             this.$set(
               this.linkSetting,
-              'desc',
-              info.meta ? info.meta.desc : '',
+              "desc",
+              info.meta ? info.meta.desc : ""
             );
           }
         },
@@ -188,12 +223,12 @@ export default {
         },
       },
       linkSetting: {
-        desc: '',
+        desc: "",
       },
       nodeSetting: {
-        name: '',
-        desc: '',
-        shape: '',
+        name: "",
+        desc: "",
+        shape: "",
       },
 
       dragConf: {
@@ -322,11 +357,11 @@ export default {
           //   },
           // },
           {
-            label: '打印数据',
+            label: "打印数据",
             selected: (graph, coordinate) => {
               this.$emit(
-                'get-pro-data',
-                JSON.stringify(graph.toJSON(), null, 2),
+                "get-pro-data",
+                JSON.stringify(graph.toJSON(), null, 2)
               );
               // console.log(JSON.stringify(graph.toJSON(), null, 2));
             },
@@ -336,7 +371,7 @@ export default {
       nodeMenu: [
         [
           {
-            label: '删除',
+            label: "删除",
             selected: (node) => {
               node.remove();
             },
@@ -353,7 +388,7 @@ export default {
       linkMenu: [
         [
           {
-            label: '删除',
+            label: "删除",
             selected: (link) => {
               link.remove();
             },
@@ -367,16 +402,16 @@ export default {
         ],
       ],
       linkBaseStyle: {
-        color: '#666666', // line 颜色
-        hover: '#000', // line hover 的颜色
-        textColor: '#666666', // line 描述文字颜色
-        textHover: '#333', // line 描述文字 hover 颜色
-        font: '16px Arial', // line 描述文字 字体设置 参考 canvas font
+        color: "#666666", // line 颜色
+        hover: "#000", // line hover 的颜色
+        textColor: "#666666", // line 描述文字颜色
+        textHover: "#333", // line 描述文字 hover 颜色
+        font: "16px Arial", // line 描述文字 字体设置 参考 canvas font
         dotted: false, // 是否是虚线
         lineDash: [4, 4], // 虚线时生效
-        background: 'rgba(255,255,255,0.6)', // 描述文字背景色
+        background: "rgba(255,255,255,0.6)", // 描述文字背景色
       },
-      fontList: ['14px Arial', 'italic small-caps bold 12px arial'],
+      fontList: ["14px Arial", "italic small-caps bold 12px arial"],
     };
   },
   created() {
@@ -410,11 +445,11 @@ export default {
     // 滚动事件用得到
     // window.addEventListener("DOMMouseScroll", this.handleScroll, false);
     // window.onmousewheel = document.onmousewheel = this.handleScroll;
-    document.addEventListener('mousemove', this.docMousemove);
-    document.addEventListener('mouseup', this.docMouseup);
-    this.$once('hook:beforeDestroy', () => {
-      document.removeEventListener('mousemove', this.docMousemove);
-      document.removeEventListener('mouseup', this.docMouseup);
+    document.addEventListener("mousemove", this.docMousemove);
+    document.addEventListener("mouseup", this.docMouseup);
+    this.$once("hook:beforeDestroy", () => {
+      document.removeEventListener("mousemove", this.docMousemove);
+      document.removeEventListener("mouseup", this.docMouseup);
     });
   },
   watch: {
@@ -479,7 +514,7 @@ export default {
       };
     },
     linkDesc(link) {
-      return link.meta ? link.meta.desc : '';
+      return link.meta ? link.meta.desc : "";
     },
     settingSubmit() {
       const conf = this.drawerConf;
@@ -519,8 +554,8 @@ export default {
         ele,
         isDown: true,
       });
-      ele.style.position = 'fixed';
-      ele.style.margin = '0';
+      ele.style.position = "fixed";
+      ele.style.margin = "0";
       ele.style.top = `${clientY - conf.offsetTop}px`;
       ele.style.left = `${clientX - conf.offsetLeft}px`;
       this.$el.appendChild(this.dragConf.ele);
@@ -531,24 +566,24 @@ export default {
     // 点击事件
     nodeClick(node) {
       // console.log(node, this.drawerConf);
-      this.msgSetting = 'node';
+      this.msgSetting = "node";
       this.drawerConf.info = node;
       this.drawerConf.type = 0;
-      this.drawerConf.title = '节点';
+      this.drawerConf.title = "节点";
       this.nodeSetting.name = node.meta.name;
-      this.nodeSetting.desc = node.meta.desc || '';
-      this.nodeSetting.shape = node.meta.shape || 'rect';
+      this.nodeSetting.desc = node.meta.desc || "";
+      this.nodeSetting.shape = node.meta.shape || "rect";
     },
     linkClick(link) {
       // console.log(link);
       if (!link) {
         return;
       }
-      this.msgSetting = 'link';
+      this.msgSetting = "link";
       this.drawerConf.info = link;
       this.drawerConf.type = 1;
-      this.drawerConf.title = '连线';
-      this.linkSetting.desc = link.meta ? link.meta.desc : '';
+      this.drawerConf.title = "连线";
+      this.linkSetting.desc = link.meta ? link.meta.desc : "";
     },
     docMousemove({ clientX, clientY }) {
       const conf = this.dragConf;
@@ -560,8 +595,9 @@ export default {
         // console.log(conf.ele.style.left,conf.ele.style.top, );
       } else if (conf.isDown) {
         // 鼠标移动量大于 5 时 移动状态生效
-        conf.isMove = Math.abs(clientX - conf.clientX) > 5
-          || Math.abs(clientY - conf.clientY) > 5;
+        conf.isMove =
+          Math.abs(clientX - conf.clientX) > 5 ||
+          Math.abs(clientY - conf.clientY) > 5;
       }
     },
     docMouseup({ clientX, clientY }) {
@@ -577,15 +613,15 @@ export default {
 
         // 判断鼠标是否进入 flow container
         if (
-          clientX > left
-          && clientX < right
-          && clientY > top
-          && clientY < bottom
+          clientX > left &&
+          clientX < right &&
+          clientY > top &&
+          clientY < bottom
         ) {
           // 获取拖动元素左上角相对 super flow 区域原点坐标
           const coordinate = this.$refs.superFlow.getMouseCoordinate(
             clientX - conf.offsetLeft + localOrigin()[0],
-            clientY - conf.offsetTop + localOrigin()[1],
+            clientY - conf.offsetTop + localOrigin()[1]
           );
 
           // 添加节点
