@@ -194,7 +194,7 @@
 :::
 
 ## 异步操作
-<br>
+
 <FormList-example-sync></FormList-example-sync>
 
 ::: details 查看代码
@@ -353,12 +353,149 @@ add---
 ```
 
 :::
-<div>　看到这，你会好奇detail代码是长什么样的, 和add.vue差不多,只是多了 "exhibit"属性,
+mixin公共代码
+::: details 查看代码
+
+``` js
+import mock from "./data";
+export default {
+    data() {
+        return {
+            visible: false,
+            elForm: {},
+            form: {
+                id: "",
+                test: "",
+                testSelect: "",
+                testCheckbox: [],
+                testRadio: "",
+                testSwitch: false,
+                testDate: "",
+                testSlot: "",
+                testNativeSlot: "",
+                ayncSelect: "",
+            },
+			// 可以通过调整数组顺序,来映射表单项顺序, 删改操作也不用去改复杂的html结构
+            formItem: [
+                {
+                    type: "input",
+                    label: "输入框",
+                    prop: "test",
+                    rules: [{ required: true }],
+                },
+                {
+                    type: "select",
+                    label: "下拉框",
+                    prop: "testSelect",
+                    list: [
+                        {
+                            label: "选项一",
+                            value: 1,
+                            disabled: false, //默认是false, 如果需要传true
+                        },
+                        {
+                            label: "选项二",
+                            value: 2,
+                            disabled: false, //默认是false, 如果需要传true
+                        },
+                    ],
+                    rules: [{ required: true }],
+                },
+                {
+                    type: "checkbox",
+                    prop: "testCheckbox",
+                    label: "测试多选框",
+                    list: [
+                        {
+                            label: "选项一",
+                            value: 0,
+                        },
+                        {
+                            label: "选项二",
+                            value: 1,
+                        },
+                    ],
+                    rules: [{ required: true }],
+                },
+                {
+                    type: "radio",
+                    label: "测试单选",
+                    prop: "testRadio",
+                    list: [
+                        {
+                            label: "选项一",
+                            value: 0,
+                        },
+                        {
+                            label: "选项二",
+                            value: 1,
+                        },
+                    ],
+                    rules: [{ required: true }],
+                },
+                {
+                    type: "switch",
+                    label: "测试switch",
+                    prop: "testSwitch",
+                    rules: [{ required: true }],
+                },
+                {
+                    type: "date",
+                    label: "测试日期",
+                    prop: "testDate",
+                    rules: [{ required: true }],
+                },
+                {
+                    type: "slot",
+                    prop: "testSlot",
+                    label: "插槽",
+                    rules: [{ required: true }],
+                },
+                {
+                    type: "nativeSlot",
+                    prop: "testNativeSlot",
+                },
+                {
+                    type: "select",
+                    label: "异步下拉框",
+                    prop: "ayncSelect",
+                    list: [],
+              
+                },
+            ],
+        }
+    },
+    methods: {
+        getDetail(id) {
+         
+            if (mock.msg === "success") {
+                Object.keys(mock.data.form).forEach((key) => {
+                    // 字段一致才行,这里方法,不固定
+                    this.form[key] = mock.data.form[key];
+                });
+            } else {
+                this.$message.error(mock.msg);
+            }
+        },
+    }
+}
+```
+:::
+<div>
+ps:　看到这，你会好奇detail代码是长什么样的, 和add.vue差不多,只是多了 "exhibit"属性,
 添加exhibi属性后,将原本的input(含多种类型)除去边框,非选中项,显示纯文本
+
 <br>
-<p><b> Q:那mixin代码是什么? </b>  　	 A:表单项,和增改查,公用的属性和函数. </p>
+<p><b>Q:那我们为什么要使用FormList组件 </b>  
+<br>　A:降低单vue文件重量,锻炼vue组件化思维 ,培养自动化工具理念,<b>"凡重复的工作,都可以被工具取代"</b></p>
 
-<p><b>Q:那这么做到底有什么好处? 	　</b> A:</p> 
-
-
-</div>
+<p><b>Q:那这么做到底有什么好处? 	　</b> 
+<br>A:
+				<ol>
+ 				<li> 遵循开发时行为结构分离原则</li> 
+				<li>降低代码耦合度,提高复用性,和可读性,</li>
+				<li>不能说提高"维护意愿",但至少一段时间后,看到这些代码不会头疼</li>
+				<li>减少单文件大面积重复标签以及"v-if模块",将复杂的逻辑与结构分离开</li>
+				 </ol>
+				</p>
+				  </div>

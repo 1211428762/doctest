@@ -2,6 +2,7 @@
   <div class="tablelist">
     <div class="container">
       <el-table
+        :class="className"
         ref="multipleTable"
         tooltip-effect="light"
         :data="tableData"
@@ -39,7 +40,9 @@
           :label="item.label"
           :min-width="item.width"
           :fixed="item.fixed"
-          show-overflow-tooltip
+          :show-overflow-tooltip="
+            item.showOverflowTooltip === false ? false : true
+          "
           :class-name="item.class"
           :type="item.type"
         >
@@ -84,15 +87,23 @@
         </el-table-column>
       </el-table>
 
-      <el-button
-        v-if="showCheckbox"
-        class="delBtn"
-        type="primary"
-        size="small"
-        plain
-        @click="deleteSeclected"
-        ><i class="el-icon-s-data"></i> 批量删除</el-button
+      <slot
+        name="multiOperate"
+        v-bind="{
+          selectItems: multipleSelectionItems,
+          selectIds: multipleSelectionIds,
+        }"
       >
+        <el-button
+          v-if="showCheckbox"
+          class="delBtn"
+          type="primary"
+          size="small"
+          plain
+          @click="multiOperate"
+          ><i class="el-icon-s-data"></i> {{ multiOperateText }}</el-button
+        >
+      </slot>
 
       <!-- 分页器 -->
       <el-pagination
@@ -114,63 +125,72 @@
 
 <script>
 export default {
-  name: 'z-tablelist',
+  name: "z-tablelist",
   props: {
     tableHead: { type: [Array], default: () => [] },
     tableData: { type: [Array], default: () => [] },
-    addBtnList: { type: [Object], default: () => { } },
+    addBtnList: { type: [Object], default: () => {} },
     showCheckbox: { type: [Boolean], default: false },
     loading: { type: [Boolean], default: () => true },
     pagination: { type: [Boolean], default: () => false },
     total: { type: [Number], default: () => 0 },
     pageSize: { type: [Number], default: () => 10 },
     currentPage: { type: [Number], default: () => 1 },
+
+    multiOperateText: { type: [String], default: () => "批量删除" },
     headerCellStyle: {
-      type: [Object], default: () => {
-        return {
-          "background": "#F5F5FA",
-          "color": "#8181A5",
-          "font-size": "12px",
-          "line-height": "18px",
-        }
-      }
-    }
+      type: [Object],
+      default: () => {
+        // return {
+        //   "background": "#F5F5FA",
+        //   "color": "#8181A5",
+        //   "font-size": "12px",
+        //   "line-height": "18px",
+        // }
+      },
+    },
+    className: { type: String },
   },
   data() {
     return {
-      multipleSelections: [], // 多选的项 --- id
+      multipleSelectionIds: [], // 多选的项 --- id
       multipleSelectionItems: [], // 整个项
     };
   },
   computed: {},
   watch: {
-    tableData() { },
-    tableHead() { },
-    loading() { },
+    tableData() {},
+    tableHead() {},
+    loading() {},
   },
   created() {
-    console.log(this.loading, '--------this.loading---------');
+    console.log(this.loading, "--------this.loading---------");
   },
-  mounted() { },
+  mounted() {},
+
   methods: {
     // 分页
     handleCurrentChange(val) {
       // this.currentPage = val;
-      this.$emit('page-change', val);
+      this.$emit("page-change", val);
     },
     // 自定义操作按钮点击，向父元素触发事件
     clkCall(methodName, row, index) {
-      this.$emit('click-callback', methodName, row, index);
+      this.$emit("click-callback", methodName, row, index);
       // console.log(methodName,row,index);
     },
     // 批量删除所选项
-    deleteSeclected() {
-      this.$emit('multi-delete', this.multipleSelectionItems, this.multipleSelections);
+    multiOperate(evt, fn = function () {}) {
+      this.$emit(
+        "multi-operate",
+        this.multipleSelectionItems,
+        this.multipleSelectionIds
+      );
+      return fn(this.multipleSelectionItems, this.multipleSelections);
     },
     // 获取选中行数据
     handelSelectionChange(val) {
-      console.log(val);
-      this.multipleSelections = val.map((cur) => cur.id);
+      this.multipleSelectionIds = val.map((cur) => cur.id);
       this.multipleSelectionItems = val;
     },
   },
@@ -179,7 +199,7 @@ export default {
 
 <style scoped>
 .tablelist >>> .el-pagination button {
-  padding: 0 20px;
+  /* padding: 0 20px; */
   border-radius: 6px;
   color: #8181a5;
 }

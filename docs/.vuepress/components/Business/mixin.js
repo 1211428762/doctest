@@ -108,7 +108,7 @@ export default {
     },
     methods: {
         getDetail(id) {
-            console.log(mock.msg, mock.data.form);
+     
             if (mock.msg === "success") {
                 Object.keys(mock.data.form).forEach((key) => {
                     // 字段一致才行,这里方法,不固定

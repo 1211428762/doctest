@@ -327,7 +327,7 @@ export default {
 
     // 得到placeholder的显示
     getPlaceholder(row) {
-      console.log(row.type);
+      // console.log(row.type);
       if (this.exhibit) return "-";
       let placeholder;
       if (

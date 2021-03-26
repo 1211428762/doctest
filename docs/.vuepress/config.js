@@ -21,7 +21,10 @@ module.exports = {
     sidebar: {
       "/guide/": ["/guide/", {
         title: "表单组件",
-        children: ['/guide/complete', "/guide/case"]
+        children: ['/guide/form-complete', "/guide/form-case"]
+      }, {
+        title: "表格组件",
+        children: ['/guide/table-complete', "/guide/table-case"]
       }],
       "/test/": ["/test/", {
         title: "测试",
