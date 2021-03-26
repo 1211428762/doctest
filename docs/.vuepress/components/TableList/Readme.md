@@ -99,7 +99,7 @@ data(){
 | :------------- | :----------------------------------------------------------- | :----------------------------------------------------------- |
 | click-callback | 向父级触发自定义事件                                         | methodName:自定义的方法名，row：当前行数据,index:当前行索引  |
 | page-change    | currentPage 改变时会触发                                     | val：当前currentPage值                                       |
-| multi-delete   | 若有showCheckbox属性，则会有批量删除操作按钮，点击触发改事件 | items：选中行数据的所有数据数组，ids：若数据有id字段，则返回选中行数据的id数组，否则为空数组 |
+| multi-operate   | 若有showCheckbox属性，则会有批量删除操作按钮，点击触发改事件 | items：选中行数据的所有数据数组，ids：若数据有id字段，则返回选中行数据的id数组，否则为空数组 |
 
 #### 事件使用示例
 
@@ -108,7 +108,7 @@ data(){
 <tablelist
   @click-callback="listenCall"
   @page-change="pageChange"
-  @multi-delete="multiDelete"
+  @multi-operate="multiOperate"
 >
 </tablelist>
 // method
@@ -120,7 +120,7 @@ methods: {
 	edit(row, index){},
 	delete(row, index){},
   pageChange(val){},
-  multiDelete(items,ids){},
+  multiOperate(items,ids){},
 }
 ```
 

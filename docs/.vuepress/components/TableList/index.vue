@@ -164,7 +164,7 @@ export default {
     loading() {},
   },
   created() {
-    console.log(this.loading, "--------this.loading---------");
+    // console.log(this.loading, "--------this.loading---------");
   },
   mounted() {},
 
