@@ -91,7 +91,7 @@ export default {
 
 <style lang="scss" scoped>
 .flowChart-panel-left {
-  width: 320px;
+  width: 400px;
   padding: 0 10px;
   margin: 0 30px;
   .line-style{

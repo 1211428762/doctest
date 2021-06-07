@@ -19,7 +19,5 @@
 这是一个详情块，在 IE / Edge 中不生效
 :::
 
-:tada :100
-<ClientOnly>
-<FlowChart-index ></FlowChart-index>
-</ClientOnly>
+
+
