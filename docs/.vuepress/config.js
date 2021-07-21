@@ -18,7 +18,7 @@ module.exports = {
           { text: '气泡', link: '/funs/buble/' },
         ]
       },
-      { text: '扩展', link: '/expand/', items: [{ text: 'test', link: '/test/' }] },
+      { text: 'flow-UI', link: '/expand/', items: [{ text: 'flow', link: '/flow/' }] },
     ],
     sidebar: {
       "/guide/": ["/guide/", {
@@ -34,14 +34,16 @@ module.exports = {
           children: ['/guide/flow-chart']
           // children: ['/guide/table-complete', "/guide/table-case"]
         }],
-      "/test/": ["/test/", {
-        title: "测试",
-        children: ['/test/subtest']
+      "/flow/": [{ title: "引言", path: "/flow/" }, {
+        title: "button",
+        path: "/flow/button",
+        // children: ['/flow/subtest']
+      }, {
+        title: "viewport",
+        path: "/flow/viewport",
+        // children: ['/flow/viewport']
       }],
-      "浪漫的程序员": ['/funs/', {
-        title: "侧边栏下拉框22",
-        children: ['/funs/web/']
-      }],
+
     }
   }
 }

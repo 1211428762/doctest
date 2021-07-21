@@ -1,0 +1,14 @@
+@import "./button.scss";
+@import "./colors.scss";
+// 主体颜色
+$themeColor:#C7EDCC;
+$danger:#ff807e;
+$primary:$themeColor;
+
+// :root{
+//     --themeColor: $themeColor;
+//     --danger:$danger;
+//     --primary:$themeColor;
+//     --test:var(--danger);
+//     color: $themeColor;
+// }

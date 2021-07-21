@@ -1,0 +1,106 @@
+@import "./colors.scss";
+@import "./common.scss";
+$border:1px solid #efefef;
+$border-radius:5px;
+$btn-font-color:darken($primary, 60%);
+$btn-bgcolor:$primary;
+$btn-font-weight:normal;
+$btn-padding:15px 20px;
+
+@mixin btn($color:$primary) {
+    background-color: darken($color, 20%);
+    color: $white;
+}
+
+@mixin btn-plain($color:$primary) {
+    background-color: lighten($color, 10%);
+    color: darken($color, 35%);
+    border-color: darken($color, 25%);
+}
+
+@mixin btn-status($color) {
+    border-color: transparent;
+    background-color: mix($white, $color, 1%);
+}
+
+.fl-btn {
+    display: inline-block;
+    line-height: 1;
+    white-space: nowrap;
+    cursor: pointer;
+    border-radius: $border-radius;
+    position: relative;
+    border: $border;
+    @include btn($primary);
+    padding: $btn-padding;
+    -webkit-appearance: none;
+    text-align: center;
+    box-sizing: border-box;
+    outline: none;
+    margin: 0;
+    transition: .1s;
+    font-weight: $btn-font-weight;
+    @include user-select();
+    overflow: hidden;
+
+    &+& {
+        margin-left: 10px;
+    }
+}
+
+.fl-btn-danger {
+    @include btn($danger);
+
+}
+
+.fl-btn.is-disabled {
+    @include btn-status($primary);
+    cursor: not-allowed;
+}
+
+.fl-btn-danger.is-disabled {
+    @include btn-status($danger);
+    cursor: not-allowed;
+}
+
+.fl-btn.is-plain {
+    @include btn-plain($primary);
+
+    &:hover {
+        @include btn($primary)
+    }
+}
+
+.fl-btn-danger.is-plain {
+    @include btn-plain($danger);
+
+    &:hover {
+        @include btn($danger)
+    }
+}
+
+// @each $type in ($primary, $danger) {
+//     .fl-btn-#{$type} {
+//         @include btn($type)
+//     }
+// }
+.fl-btn:not([disabled]):active::after {
+    transform: translate(-50%, -50%) scale(0);
+    opacity: .3;
+    transition: 0s;
+}
+
+.fl-btn::after {
+    content: "";
+    display: block;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    left: var(--offsetx, 0);
+    top: var(--offsety, 0);
+    pointer-events: none;
+    background: radial-gradient(circle, currentColor 10%, transparent 10.01%) no-repeat 50%;
+    transform: translate(-50%, -50%) scale(8);
+    opacity: 0;
+    transition: transform .3s, opacity .8s;
+}
