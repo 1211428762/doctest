@@ -42,6 +42,10 @@ module.exports = {
         title: "viewport",
         path: "/flow/viewport",
         // children: ['/flow/viewport']
+      }, {
+        title: "dialog",
+        path: "/flow/dialog",
+        // children: ['/flow/viewport']
       }],
 
     }

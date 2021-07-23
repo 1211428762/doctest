@@ -1,29 +1,32 @@
 <template>
   <div>
-  <h1>按钮组</h1>
+    <h1>按钮组</h1>
     <fButton @click="clickEvt">primary</fButton>
     <fButton type="danger">danger</fButton>
     <fButton plain>plain</fButton>
     <fButton type="danger" plain>danger</fButton>
     <fButton disabled>disabled</fButton>
     <fButton type="danger" disabled>danger</fButton>
-
+ 
   </div>
 </template>
 
 <script>
-
 import fButton from "./components/button.vue";
+import fDialog from "./components/dialog.vue";
 export default {
   name: "",
   data() {
-    return {};
+    return {
+      show:false
+    };
   },
-  components: { fButton },
+  components: { fButton, fDialog },
   mounted() {},
   methods: {
     clickEvt(evt) {
-      console.log("clickEvt-------",evt);
+      this.show=true
+      console.log("clickEvt-------", evt);
     },
   },
 };
@@ -54,7 +57,7 @@ export default {
     <fButton type="danger" plain>danger</fButton>
     <fButton disabled>disabled</fButton>
     <fButton type="danger" disabled>danger</fButton>
- <viewport/>
+    <viewport />
   </div>
 </template>
 
