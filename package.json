@@ -19,6 +19,7 @@
     "async-validator": "1.11.5",
     "element-ui": "^2.15.0",
     "sass-loader": "5.0.0",
+    "sass-resources-loader": "^2.2.3",
     "vue-highlight": "^0.0.0"
   }
 }

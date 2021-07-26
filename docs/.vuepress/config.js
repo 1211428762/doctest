@@ -1,7 +1,8 @@
 module.exports = {
   base: '/doctest/',
   title: '测试文档 demo',
-  dest: './dist',    // 设置输出目录
+  dest: './dist',    // 设置输出目录,
+  
   repo: 'https://github.com/1211428762/doctest', // 添加 github 链接.
   description: '练习文档',
   themeConfig: {
@@ -46,6 +47,10 @@ module.exports = {
         title: "dialog",
         path: "/flow/dialog",
         // children: ['/flow/viewport']
+      },
+      {
+        title: "area",
+        path: "/flow/area",
       }],
 
     }
