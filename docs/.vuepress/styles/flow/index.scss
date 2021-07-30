@@ -12,3 +12,36 @@ $primary:$themeColor;
 //     --test:var(--danger);
 //     color: $themeColor;
 // }
+.f-body-unclick {
+    * {
+        pointer-events: none;
+    }
+}
+
+.f-fadeIn {
+    animation: fadeIn cubic-bezier(0.075, 0.82, 0.165, 1)
+}
+
+.f-fadeOut {
+    animation: fadeOut cubic-bezier(0.075, 0.82, 0.165, 1)
+}
+
+@keyframes fadeIn {
+    0% {
+        opacity: 0
+    }
+
+    to {
+        opacity: 1
+    }
+}
+
+@keyframes fadeOut {
+    0% {
+        opacity: 1
+    }
+
+    to {
+        opacity: 0
+    }
+}

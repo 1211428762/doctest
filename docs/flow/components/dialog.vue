@@ -12,7 +12,6 @@
       @click.self="close"
     
     >
-      {{ clickOverlayClose }}
       <section class="fl-dialog-content" :style="{ width }">
         <header class="fl-dialog-header">
           <slot name="header">标题</slot>
