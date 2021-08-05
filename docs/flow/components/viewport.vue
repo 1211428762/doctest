@@ -48,7 +48,7 @@ export default {
             }
           });
         },
-        { threshold: [0.6, 1] } //元素进入视窗百分比
+        { threshold: 1 } //元素进入视窗百分比
       );
 
       Array.from(ele || [], (ele) => io.observe(ele));
@@ -64,29 +64,30 @@ export default {
 .viewport {
   & > div,
   & > section {
-    transition: 0.4s all;
+    transition: 0 !important;
     // transition-delay: 0.2s;
   }
   .fadeTop {
-    transform: translateY(100%) scale(1);
-    opacity: 0;
+    transform: translateY(99%) scale(1);
+    opacity: .01;
+    transition: .5s all;
   }
   .fadeLeft {
-    transform: translateX(100%) scale(1);
-    opacity: 0;
+    transform: translateX(99%) scale(1);
+    opacity: .01;  transition: .5s all;
   }
   .fadeRight {
-    transform: translateX(-100%) scale(1);
-    opacity: 0;
+    transform: translateX(-99%) scale(1);
+    opacity: .01;  transition: .5s all;
   }
 
   .left-right-in {
-    opacity: 0;
+    opacity: .01;  transition: .5s all;
     &:nth-of-type(odd) {
-      transform: translateX(-100%);
+      transform: translateX(-99%);
     }
     &:nth-of-type(even) {
-      transform: translateX(100%);
+      transform: translateX(99%);
     }
   }
   .fadeIn {

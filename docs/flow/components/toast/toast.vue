@@ -33,7 +33,7 @@ export default {
       message: "消息提示",
       duration: 2000,
       iconAnime: false,
-      body: document.body,
+      body:{},
     };
   },
   watch: {
@@ -44,6 +44,9 @@ export default {
         this.body.classList.remove("f-body-unclick");
       }
     },
+  },
+  mounted(){
+this.body=document.body
   },
   methods: {
     info({ message = "信息", duration = 2000 }) {

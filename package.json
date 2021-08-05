@@ -13,7 +13,8 @@
   "scripts": {
     "dev": "vuepress dev docs",
     "build": "vuepress build docs",
-    "deploy": "npm run build && gh-pages -d dist"
+    "deploy": "npm run build && gh-pages -d dist",
+    "push":"gh-pages -d dist"
   },
   "dependencies": {
     "async-validator": "1.11.5",

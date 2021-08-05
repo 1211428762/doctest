@@ -55,6 +55,10 @@ module.exports = {
       {
         title: "toast",
         path: "/flow/toast",
+      },
+      {
+        title: "badge",
+        path: "/flow/badge",
       }
     ],
 

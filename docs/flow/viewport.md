@@ -5,27 +5,39 @@
       当 <b>元素进入视窗</b> ( <b>缓慢滚动</b> 演示效果更佳,
       pc/移动均支持),触发的动画,目前支持四种:
     </p>
-<ClientOnly>
-    <section class="viewport-demo">
-      <viewport direction="free" class="scroll-bar">
-        <div class="test">1</div>
-        <div class="test">2</div>
-        <div class="test">3</div>
-        <p>左右进入</p>
-      </viewport>
-      <viewport direction="left" class="scroll-bar">
-        <div class="test">1</div>
-        <p>从左进入</p>
-      </viewport>
-      <viewport direction="right" class="scroll-bar">
-        <div class="test">1</div>
-        <p>从右进入</p>
-      </viewport>
-      <viewport direction="bottom" class="scroll-bar">
-        <div class="test">1</div>
-        <p>从底下进入</p>
-      </viewport>
-    </section>
+    <ClientOnly>
+      <section class="viewport-demo">
+        <viewport direction="free" class="scroll-bar">
+          <div class="test">1</div>
+          <div class="test">2</div>
+          <div class="test">3</div>
+          <p>左右进入</p>
+        </viewport>
+        <viewport direction="left" class="scroll-bar">
+          <div class="test">1</div>
+          <p>从左进入</p>
+        </viewport>
+        <viewport direction="right" class="scroll-bar">
+          <div class="test">1</div>
+          <p>从右进入</p>
+        </viewport>
+        <viewport direction="bottom" class="scroll-bar">
+          <div class="test">1</div>
+          <p>从底下进入</p>
+        </viewport>
+        <p>使用案例</p>
+        <viewport direction="bottom" class="scroll-bar viewport-example">
+          <div  class="test" >
+            <img
+              src="https://img0.baidu.com/it/u=3093440885,1425730067&fm=26&fmt=auto&gp=0.jpg"
+              alt=""
+            />
+            <p>绿叶图片</p>
+            <p>绿色意味着生机,和无限的希望</p>
+          </div>
+          <p>从底下进入</p>
+        </viewport>
+      </section>
     </ClientOnly>
   </div>
 </template>
@@ -56,7 +68,8 @@ export default {
     width: 49%;
     height: 300px;
     overflow-y: scroll;
-    & :first-child {
+    > div:first-child,
+    > section:first-child {
       margin-top: 500px;
     }
   }
@@ -68,7 +81,7 @@ export default {
     color: white;
     line-height: 50px;
     background: deepskyblue;
-    transition-duration: 1s !important;
+    // transition-duration: 1s !important;
   }
 }
 .scroll-bar {
@@ -78,6 +91,16 @@ export default {
     position: absolute;
     top: 0;
     left: 50%;
+  }
+}
+.viewport-example {
+  figure {
+    width: 90%;
+    height: 100px;
+  }
+  img {
+    width: 50%;
+    object-fit: cover;
   }
 }
 </style>
