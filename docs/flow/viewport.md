@@ -25,7 +25,7 @@
           <div class="test">1</div>
           <p>从底下进入</p>
         </viewport>
-        <p>使用案例</p>
+        <!-- <p>使用案例</p>
         <viewport direction="bottom" class="scroll-bar viewport-example">
           <div  class="test" >
             <img
@@ -36,7 +36,7 @@
             <p>绿色意味着生机,和无限的希望</p>
           </div>
           <p>从底下进入</p>
-        </viewport>
+        </viewport> -->
       </section>
     </ClientOnly>
   </div>

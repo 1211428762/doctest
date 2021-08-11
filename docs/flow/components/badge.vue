@@ -1,12 +1,8 @@
 <template>
   <div class="fl-badge">
     <slot></slot>
-    <sup
-      v-if="isDot"
-      class="fl-badge-dot"
-      :style="overlapPosition"
-    ></sup>
-    <sup v-else>{{ value }}</sup>
+    <sup v-if="isDot" class="fl-badge-dot" :style="overlapPosition"></sup>
+    <sup v-else>{{ maxValue }}</sup>
   </div>
 </template>
 
@@ -30,17 +26,41 @@ export default {
       let position = "unset";
       if (this.bottom) {
         position = this.left
-          ? `${this.overlap?'calc(100% - 6px) calc(100% - 6px) auto auto' :' 100% 100% auto auto'}`
-          : `${this.overlap?'calc(100% - 6px)  auto auto calc(100% - 6px)' :' 100%  auto auto 100%'}`;
+          ? `${
+              this.overlap
+                ? "calc(100% - 6px) calc(100% - 6px) auto auto"
+                : " 100% 100% auto auto"
+            }`
+          : `${
+              this.overlap
+                ? "calc(100% - 6px)  auto auto calc(100% - 6px)"
+                : " 100%  auto auto 100%"
+            }`;
       } else {
         position = this.left
-          ? `${this.overlap?'auto calc(100% - 6px) calc(100% - 6px)  auto' :' auto 100% 100%  auto'}` 
-          : `${this.overlap?'auto auto calc(100% - 6px) calc(100% - 6px)  ' :' auto  auto 100% 100%  '}` 
+          ? `${
+              this.overlap
+                ? "auto calc(100% - 6px) calc(100% - 6px)  auto"
+                : " auto 100% 100%  auto"
+            }`
+          : `${
+              this.overlap
+                ? "auto auto calc(100% - 6px) calc(100% - 6px)  "
+                : " auto  auto 100% 100%  "
+            }`;
       }
-console.log(position);
       return {
         inset: position,
       };
+    },
+    maxValue() {
+      if (this.max && typeof this.value == "number") {
+        if (this.value > this.max) {
+          return this.max + "+";
+        }
+      } else {
+        return this.value;
+      }
     },
   },
   mounted() {},
@@ -68,7 +88,7 @@ console.log(position);
     text-align: center;
     white-space: nowrap;
     top: -8px;
-    right: -6px;
+    right: -10px;
   }
   & &-dot {
     width: 10px;
