@@ -8,21 +8,20 @@ $btn-font-weight:normal;
 $btn-padding:15px 20px;
 
 @mixin btn($color:$primary) {
-    background: linear-gradient(190deg, $color -100%, darken($color, 30%) 80%);
+    background: linear-gradient(190deg, lighten($color, 10%) -100%, darken($color, 25%) 80%);
     color: $white;
 }
 
 @mixin btn-plain($color:$primary) {
     // background: linear-gradient(190deg, lighten($color, 10%) -100%, darken($color, 30%) 80%);
-    background: lighten($color, 10%);
+    background: lighten($color, 5%);
     color: darken($color, 35%);
-
     border-color: darken($color, 25%);
 }
 
 @mixin btn-status($color) {
     border-color: transparent;
-    background: mix($white, $color, 1%);
+    background: mix(rgb(189, 184, 184), $color, 10%);
 }
 
 .fl-btn {
@@ -114,6 +113,7 @@ $btn-padding:15px 20px;
 
 .fl-btn-hover {
     position: relative;
+
     &::before,
     &::after {
         box-sizing: border-box;
@@ -123,26 +123,31 @@ $btn-padding:15px 20px;
         height: 0;
         border: 2px solid transparent;
     }
+
     &::before {
         left: 0;
         top: 0;
     }
+
     &::after {
         right: 0;
         bottom: 0;
     }
+
     &:hover {
         &::before {
             border-right-color: #d3f1aa;
             border-top-color: #d3f1aa;
             transition: width 0.2s ease-out, height 0.2s ease-out 0.2s;
         }
+
         &::after {
             border-left-color: #d3f1aa;
             border-bottom-color: #d3f1aa;
             transition: border-color 0s ease-out 0.4s, width 0.2s ease-out 0.4s,
                 height 0.2s ease-out 0.6s;
         }
+
         &::before,
         &::after {
             width: 100%;
