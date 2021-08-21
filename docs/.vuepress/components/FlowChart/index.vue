@@ -30,7 +30,7 @@
               <template v-slot:node="{ meta }">
                 <div @mouseup="nodeMouseUp" class="flow-node ellipsis">
                   <icon-tag :iconType="meta.type"></icon-tag>
-                  {{ meta.name }}
+                  {{ meta.name ||meta.label }}
                 </div>
               </template>
             </super-flow>
@@ -167,6 +167,7 @@ export default {
       type: String,
       default: "600px",
     },
+    lineStyle: Object,
     // graphMenu: {
     //   type: Array,
     //   default: () => [],
@@ -176,7 +177,6 @@ export default {
     return {
       MovePalette: 0,
       fullscreenLoading: false,
-
       styleSelection: [],
       curScale: 1,
       msgSetting: "node", // 判断现在设置哪个属性
@@ -360,10 +360,10 @@ export default {
             label: "打印数据",
             selected: (graph, coordinate) => {
               this.$emit(
-                "get-pro-data",
+                "chart-data",
                 JSON.stringify(graph.toJSON(), null, 2)
               );
-              // console.log(JSON.stringify(graph.toJSON(), null, 2));
+              console.log(JSON.stringify(graph.toJSON(), null, 2));
             },
           },
         ],
@@ -409,7 +409,7 @@ export default {
         font: "16px Arial", // line 描述文字 字体设置 参考 canvas font
         dotted: false, // 是否是虚线
         lineDash: [4, 4], // 虚线时生效
-        background: "rgba(255,255,255,0.6)", // 描述文字背景色
+        background: "rgba(255,255,255,0)", // 描述文字背景色
       },
       fontList: ["14px Arial", "italic small-caps bold 12px arial"],
     };
@@ -430,7 +430,8 @@ export default {
       };
       this.graphMenu[0].push(graphMenuItem);
     }
-
+    //将传入样式合并到传入到核心的样式对象
+    Object.assign(this.linkBaseStyle, this.lineStyle);
     // console.log(this.graphMenu);
   },
   mounted() {
@@ -604,12 +605,8 @@ export default {
       const conf = this.dragConf;
       conf.isDown = false;
       if (conf.isMove) {
-        const {
-          top,
-          right,
-          bottom,
-          left,
-        } = this.$refs.flowContainer.getBoundingClientRect();
+        const { top, right, bottom, left } =
+          this.$refs.flowContainer.getBoundingClientRect();
 
         // 判断鼠标是否进入 flow container
         if (

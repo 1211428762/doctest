@@ -1,10 +1,11 @@
 <template>
   <div>
-    <badge isDot overlap :value="99"><fbutton>数据</fbutton></badge>
-    <badge isDot overlap left :value="99"><fbutton>数据</fbutton></badge>
-    <badge isDot overlap bottom :value="99"><fbutton>数据</fbutton></badge>
-    <badge isDot overlap left bottom :value="99"><fbutton>数据</fbutton></badge>
-    <badge :max="50" :value="200"><fbutton>数据</fbutton></badge>
+  <h1>徽标</h1>
+    <badge isDot  :value="99"><fbutton>默认</fbutton></badge>
+    <badge isDot  left :value="99"><fbutton>左上</fbutton></badge>
+    <badge isDot  bottom :value="99"><fbutton>右下</fbutton></badge>
+    <badge isDot :overlap=false ><fbutton>不重叠</fbutton></badge>
+    <badge :max="99" :value="200"><fbutton>数据</fbutton></badge>
   </div>
 </template>
 
@@ -32,4 +33,16 @@ export default {
 | isDot   | 是否以点显示              | boolean       | false          |
 | left    | 徽标左边显示(默认在右)    | boolean       | false          |
 | bottom  | 徽标在下边显示            | boolean       | false          |
-| overlap | 是否重叠                  | boolean       | false          |
+| overlap | 是否重叠                  | boolean       | true           |
+
+::: details 查看代码
+```vue
+<template>
+    <badge isDot  :value="99"><fbutton>默认</fbutton></badge> 
+    <badge isDot  left :value="99"><fbutton>左上</fbutton></badge>
+    <badge isDot  bottom :value="99"><fbutton>右下</fbutton></badge>
+    <badge isDot :overlap=false ><fbutton>不重叠</fbutton></badge>
+    <badge :max="99" :value="200"><fbutton>数据</fbutton></badge>
+</template>
+```
+::: 

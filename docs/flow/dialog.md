@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1>Dialog弹窗</h1>
+    <h1>弹窗</h1>
     <fButton @click="clickEvt">打开弹窗</fButton>
     <fDialog :show.sync="show"> 弹窗内容</fDialog>
   </div>

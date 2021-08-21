@@ -21,9 +21,9 @@
 
 **必选,**
 
-label字段默认显示文字, 
+label字段默认显示文字, 绑定的初始值.展示用
 
-name用于默认文字修改后的回显
+name用于默认文字修改后的显示,修改用
 
 type  图标的种类 task,finish,start,end,default
 
@@ -67,10 +67,10 @@ shape: 流程块的形状  默认是矩形,可缺省 , ellipse椭圆,rect矩形,
 
 #### 打印表格数据方法
 
-**get-pro-data**,
+**chart-data**,
 
 ```
- @get-pro-data="getData"
+ @chart-data="getData"
 
  getData(data) {
 

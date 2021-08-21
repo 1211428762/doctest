@@ -2,7 +2,7 @@ module.exports = {
   base: '/doctest/',
   title: '基于vue2.xUi框架,面向pc,移动端的实用组件',
   dest: './dist',    // 设置输出目录,
-  
+
   repo: 'https://github.com/1211428762/doctest', // 添加 github 链接.
   description: 'flow-Ui',
   themeConfig: {
@@ -11,7 +11,7 @@ module.exports = {
       {
         text: '首页', link: "/"
       },
-      // { text: '待开发', link: '/pending/', items: [{ text: 'test', link: '/test/' }] },
+      { text: '表单表格组件', link: '/guide/', },
       {
         text: '浪漫的程序员', items: [
           { text: '学弟学妹的面试宝典', link: '/funs/interview/' },
@@ -19,7 +19,7 @@ module.exports = {
           { text: '气泡', link: '/funs/buble/' },
         ]
       },
-      { text: 'flow-UI', link: '/expand/', items: [{ text: 'flow', link: '/flow/' }] },
+      { text: 'flow-UI', items: [{ text: 'flow', link: '/flow/' }] },
     ],
     sidebar: {
       "/guide/": ["/guide/", {
@@ -27,26 +27,19 @@ module.exports = {
         children: ['/guide/form-complete', "/guide/form-case"]
       }, {
           title: "表格组件",
-          children: ['/guide/table-complete']
+          path: '/guide/table-complete'
           // children: ['/guide/table-complete', "/guide/table-case"]
         },
-        {
-          title: "流程图组件",
-          children: ['/guide/flow-chart']
-          // children: ['/guide/table-complete', "/guide/table-case"]
-        }],
+      ],
       "/flow/": [{ title: "引言", path: "/flow/" }, {
         title: "button",
         path: "/flow/button",
-        // children: ['/flow/subtest']
       }, {
         title: "viewport",
         path: "/flow/viewport",
-        // children: ['/flow/viewport']
       }, {
         title: "dialog",
         path: "/flow/dialog",
-        // children: ['/flow/viewport']
       },
       {
         title: "area",
@@ -59,8 +52,11 @@ module.exports = {
       {
         title: "badge",
         path: "/flow/badge",
+      }, {
+        title: "flow-chart",
+        path: '/flow/flow-chart'
       }
-    ],
+      ],
 
     }
   }

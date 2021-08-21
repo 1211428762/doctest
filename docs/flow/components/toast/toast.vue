@@ -15,6 +15,7 @@
         class="fl-toast-fail-wrap"
       ></section>
       <span class="fl-toast-msg">{{ message }}</span>
+      <section v-html="html"></section>
     </div>
   </transition>
 </template>
@@ -33,7 +34,8 @@ export default {
       message: "消息提示",
       duration: 2000,
       iconAnime: false,
-      body:{},
+      body: {},
+      html: "",
     };
   },
   watch: {
@@ -45,20 +47,18 @@ export default {
       }
     },
   },
-  mounted(){
-this.body=document.body
+  mounted() {
+    this.body = document.body;
   },
   methods: {
-    info({ message = "信息", duration = 2000 }) {
-      this.message = message;
-      this.showToast = true;
+    info({ message = "信息", duration = 2000, html = "" }) {
       this.type = "normal";
+      this._show(message, html);
       setTimeout(() => (this.showToast = false), duration);
     },
-    success({ message = "成功", duration = 2000 }) {
-      this.message = message;
+    success({ message = "成功", duration = 2000, html = "" }) {
       this.type = "success";
-      this.showToast = true;
+      this._show(message, html);
       setTimeout(() => {
         this.iconAnime = true;
       }, 300);
@@ -67,10 +67,9 @@ this.body=document.body
         this.iconAnime = false;
       }, duration);
     },
-    fail({ message = "失败", duration = 2000 }) {
-      this.message = message;
+    fail({ message = "失败", duration = 2000, html = "" }) {
+      this._show(message, html);
       this.type = "fail";
-      this.showToast = true;
       setTimeout(() => {
         this.iconAnime = true;
       }, 300);
@@ -78,6 +77,11 @@ this.body=document.body
         this.showToast = false;
         this.iconAnime = false;
       }, duration);
+    },
+    _show(message, html) {
+      this.message = message;
+      this.showToast = true;
+      this.html = html;
     },
   },
 };

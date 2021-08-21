@@ -2,7 +2,7 @@
 home: true
 heroImage: "https://www.vuepress.cn/hero.png"
 actionText: 快速上手 →
-actionLink: /guide/
+actionLink: /flow/
 features:
 
 - title: 奇思妙想

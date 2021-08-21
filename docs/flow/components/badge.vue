@@ -15,7 +15,10 @@ export default {
     isDot: Boolean,
     value: [Number, String],
     max: Number,
-    overlap: Boolean,
+    overlap: {
+      type: Boolean,
+      default: true,
+    },
   },
   components: {},
   data() {

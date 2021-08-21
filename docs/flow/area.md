@@ -1,5 +1,6 @@
 <template>
   <div>
+    <h1>地区选择</h1>
     <h3>默认</h3>
     <areaSelect></areaSelect>
     <h3>隐藏区域</h3>
@@ -48,26 +49,7 @@ export default {
   components: { areaSelect },
 };
 </script>
-::: details 查看代码 
-```vue
-<areaSelect/>//默认
-<areaSelect hideArea/>//隐藏区域
-<areaSelect onlyProvince/>//只显示省
-<areaSelect provinceDisabled cityDisabled areaDisabled/>// 置灰不可用
-<areaSelect :placeholders="placeholders"/>
-    //placeholders: {
-    //   province: "-- 请选择省 --",
-    //  city: "-- 请选择市 --",
-    //  area: "-- 请选择区 --",
-    // }
-<areaSelect
-      @city-selected="citySelected"
-      :province.sync="province"
-      :city.sync="city"
-      :area.sync="area"
-    /> //初始值,以及选择的值,看看控制台
-```
-:::
+
 ### Attributes
 
 | 参数             | 说明               | 类型           | 可选值       | 默认值 |
@@ -88,4 +70,24 @@ export default {
 | ------------ | -------------------------------------------------------- |
 | reset        | 组件数据重置方法,需求获取组件实例                        |
 | city-selected | 组件选择的数据,返回格式{province:"xx",city:"xx",area:""} |
+::: details 查看代码 
+```vue
+<areaSelect/>//默认
+<areaSelect hideArea/>//隐藏区域
+<areaSelect onlyProvince/>//只显示省
+<areaSelect provinceDisabled cityDisabled areaDisabled/>// 置灰不可用
+<areaSelect :placeholders="placeholders"/>
+    //placeholders: {
+    //   province: "-- 请选择省 --",
+    //  city: "-- 请选择市 --",
+    //  area: "-- 请选择区 --",
+    // }
+<areaSelect
+      @city-selected="citySelected"
+      :province.sync="province"
+      :city.sync="city"
+      :area.sync="area"
+    /> //初始值,以及选择的值,看看控制台
+```
+:::
 
