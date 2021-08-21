@@ -3,88 +3,60 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>基于vue2.xUi框架,面向pc,移动端的实用组件</title>
+    <title>地区级联选择 | 基于vue2.xUi框架,面向pc,移动端的实用组件</title>
     <meta name="generator" content="VuePress 1.7.1">
     
     <meta name="description" content="flow-Ui">
     
-    <link rel="preload" href="/doctest/assets/css/0.styles.672d0818.css" as="style"><link rel="preload" href="/doctest/assets/js/app.305904ba.js" as="script"><link rel="preload" href="/doctest/assets/js/1.eab89fef.js" as="script"><link rel="prefetch" href="/doctest/assets/js/10.2d8ee332.js"><link rel="prefetch" href="/doctest/assets/js/11.acf444dc.js"><link rel="prefetch" href="/doctest/assets/js/12.67d516f2.js"><link rel="prefetch" href="/doctest/assets/js/13.e7adaa24.js"><link rel="prefetch" href="/doctest/assets/js/14.5feac79d.js"><link rel="prefetch" href="/doctest/assets/js/15.7a892c53.js"><link rel="prefetch" href="/doctest/assets/js/16.81a6fdea.js"><link rel="prefetch" href="/doctest/assets/js/17.f7131d8e.js"><link rel="prefetch" href="/doctest/assets/js/18.f6461173.js"><link rel="prefetch" href="/doctest/assets/js/19.cd6f7664.js"><link rel="prefetch" href="/doctest/assets/js/20.a2371eaa.js"><link rel="prefetch" href="/doctest/assets/js/21.c41bc80b.js"><link rel="prefetch" href="/doctest/assets/js/22.72b212cc.js"><link rel="prefetch" href="/doctest/assets/js/23.34ab8ed8.js"><link rel="prefetch" href="/doctest/assets/js/24.1a78b77f.js"><link rel="prefetch" href="/doctest/assets/js/25.6647ca5a.js"><link rel="prefetch" href="/doctest/assets/js/26.657368cb.js"><link rel="prefetch" href="/doctest/assets/js/27.8741dd2e.js"><link rel="prefetch" href="/doctest/assets/js/28.12052ca6.js"><link rel="prefetch" href="/doctest/assets/js/29.0d7475fd.js"><link rel="prefetch" href="/doctest/assets/js/3.0e0146bd.js"><link rel="prefetch" href="/doctest/assets/js/30.7da1e77a.js"><link rel="prefetch" href="/doctest/assets/js/31.6ded823e.js"><link rel="prefetch" href="/doctest/assets/js/32.1e65ff40.js"><link rel="prefetch" href="/doctest/assets/js/33.4e8f0436.js"><link rel="prefetch" href="/doctest/assets/js/34.d00c97b3.js"><link rel="prefetch" href="/doctest/assets/js/35.51587698.js"><link rel="prefetch" href="/doctest/assets/js/36.eeb09702.js"><link rel="prefetch" href="/doctest/assets/js/37.d8b369ae.js"><link rel="prefetch" href="/doctest/assets/js/38.06adc36a.js"><link rel="prefetch" href="/doctest/assets/js/39.9a2a71d0.js"><link rel="prefetch" href="/doctest/assets/js/4.48e15d79.js"><link rel="prefetch" href="/doctest/assets/js/5.26d10861.js"><link rel="prefetch" href="/doctest/assets/js/6.d8f55dcb.js"><link rel="prefetch" href="/doctest/assets/js/7.0159bf74.js"><link rel="prefetch" href="/doctest/assets/js/8.43a52caf.js"><link rel="prefetch" href="/doctest/assets/js/9.3680f6bb.js">
-    <link rel="stylesheet" href="/doctest/assets/css/0.styles.672d0818.css">
+    <link rel="preload" href="/doctest/assets/css/0.styles.06714d7c.css" as="style"><link rel="preload" href="/doctest/assets/js/app.da059727.js" as="script"><link rel="preload" href="/doctest/assets/js/2.0f7fd3d6.js" as="script"><link rel="preload" href="/doctest/assets/js/29.94f0c4ed.js" as="script"><link rel="prefetch" href="/doctest/assets/js/10.2d8ee332.js"><link rel="prefetch" href="/doctest/assets/js/11.566e8693.js"><link rel="prefetch" href="/doctest/assets/js/12.67d516f2.js"><link rel="prefetch" href="/doctest/assets/js/13.ca74cb4f.js"><link rel="prefetch" href="/doctest/assets/js/14.8f395c53.js"><link rel="prefetch" href="/doctest/assets/js/15.8275e7c4.js"><link rel="prefetch" href="/doctest/assets/js/16.5ac019f6.js"><link rel="prefetch" href="/doctest/assets/js/17.f7131d8e.js"><link rel="prefetch" href="/doctest/assets/js/18.f6461173.js"><link rel="prefetch" href="/doctest/assets/js/19.628948ed.js"><link rel="prefetch" href="/doctest/assets/js/20.0e6e6ca3.js"><link rel="prefetch" href="/doctest/assets/js/21.f1884bdf.js"><link rel="prefetch" href="/doctest/assets/js/22.0596b571.js"><link rel="prefetch" href="/doctest/assets/js/23.aa2d57f7.js"><link rel="prefetch" href="/doctest/assets/js/24.99098798.js"><link rel="prefetch" href="/doctest/assets/js/25.6647ca5a.js"><link rel="prefetch" href="/doctest/assets/js/26.657368cb.js"><link rel="prefetch" href="/doctest/assets/js/27.191072fe.js"><link rel="prefetch" href="/doctest/assets/js/28.90cc319a.js"><link rel="prefetch" href="/doctest/assets/js/3.297ba5d8.js"><link rel="prefetch" href="/doctest/assets/js/30.eaeb021d.js"><link rel="prefetch" href="/doctest/assets/js/31.9aa5a5b4.js"><link rel="prefetch" href="/doctest/assets/js/32.b1fc37b0.js"><link rel="prefetch" href="/doctest/assets/js/33.78eac2c8.js"><link rel="prefetch" href="/doctest/assets/js/34.ca6c382d.js"><link rel="prefetch" href="/doctest/assets/js/35.cbf41f2b.js"><link rel="prefetch" href="/doctest/assets/js/36.2c285ed4.js"><link rel="prefetch" href="/doctest/assets/js/37.aedd80da.js"><link rel="prefetch" href="/doctest/assets/js/38.e23dd96d.js"><link rel="prefetch" href="/doctest/assets/js/39.3924f38a.js"><link rel="prefetch" href="/doctest/assets/js/4.4033c140.js"><link rel="prefetch" href="/doctest/assets/js/40.a4f47876.js"><link rel="prefetch" href="/doctest/assets/js/5.017086fe.js"><link rel="prefetch" href="/doctest/assets/js/6.ac66752f.js"><link rel="prefetch" href="/doctest/assets/js/7.8d37bfa9.js"><link rel="prefetch" href="/doctest/assets/js/8.126c65f5.js"><link rel="prefetch" href="/doctest/assets/js/9.a0b097c5.js">
+    <link rel="stylesheet" href="/doctest/assets/css/0.styles.06714d7c.css">
   </head>
   <body>
-    <div id="app" data-server-rendered="true"><div class="distpicker-address-wrapper"><select name="province"><option selected="selected" value="省">
-      省
-    </option> <option label="北京市" value="110000">
-      北京市
-    </option><option label="天津市" value="120000">
-      天津市
-    </option><option label="河北省" value="130000">
-      河北省
-    </option><option label="山西省" value="140000">
-      山西省
-    </option><option label="内蒙古自治区" value="150000">
-      内蒙古自治区
-    </option><option label="辽宁省" value="210000">
-      辽宁省
-    </option><option label="吉林省" value="220000">
-      吉林省
-    </option><option label="黑龙江省" value="230000">
-      黑龙江省
-    </option><option label="上海市" value="310000">
-      上海市
-    </option><option label="江苏省" value="320000">
-      江苏省
-    </option><option label="浙江省" value="330000">
-      浙江省
-    </option><option label="安徽省" value="340000">
-      安徽省
-    </option><option label="福建省" value="350000">
-      福建省
-    </option><option label="江西省" value="360000">
-      江西省
-    </option><option label="山东省" value="370000">
-      山东省
-    </option><option label="河南省" value="410000">
-      河南省
-    </option><option label="湖北省" value="420000">
-      湖北省
-    </option><option label="湖南省" value="430000">
-      湖南省
-    </option><option label="广东省" value="440000">
-      广东省
-    </option><option label="广西壮族自治区" value="450000">
-      广西壮族自治区
-    </option><option label="海南省" value="460000">
-      海南省
-    </option><option label="重庆市" value="500000">
-      重庆市
-    </option><option label="四川省" value="510000">
-      四川省
-    </option><option label="贵州省" value="520000">
-      贵州省
-    </option><option label="云南省" value="530000">
-      云南省
-    </option><option label="西藏自治区" value="540000">
-      西藏自治区
-    </option><option label="陕西省" value="610000">
-      陕西省
-    </option><option label="甘肃省" value="620000">
-      甘肃省
-    </option><option label="青海省" value="630000">
-      青海省
-    </option><option label="宁夏回族自治区" value="640000">
-      宁夏回族自治区
-    </option><option label="新疆维吾尔自治区" value="650000">
-      新疆维吾尔自治区
-    </option><option label="台湾省" value="710000">
-      台湾省
-    </option><option label="香港特别行政区" value="810000">
-      香港特别行政区
-    </option><option label="澳门特别行政区" value="820000">
-      澳门特别行政区
-    </option><option label="海外" value="900000">
-      海外
-    </option></select> <select name="city"><option selected="selected" value="市">市</option> </select> <select name="area"><option selected="selected" value="区">区</option> </select></div><div class="global-ui"></div></div>
-    <script src="/doctest/assets/js/app.305904ba.js" defer></script><script src="/doctest/assets/js/1.eab89fef.js" defer></script>
+    <div id="app" data-server-rendered="true"><div class="theme-container"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/doctest/" class="home-link router-link-active"><img src="https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=1514571003,1845775142&amp;fm=26&amp;gp=0.jpg" alt="基于vue2.xUi框架,面向pc,移动端的实用组件" class="logo"> <span class="site-name can-hide">基于vue2.xUi框架,面向pc,移动端的实用组件</span></a> <div class="links"><div class="search-box"><input aria-label="Search" autocomplete="off" spellcheck="false" value=""> <!----></div> <nav class="nav-links can-hide"><div class="nav-item"><a href="/doctest/" class="nav-link">
+  首页
+</a></div><div class="nav-item"><a href="/doctest/guide/" class="nav-link">
+  表单表格组件
+</a></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="浪漫的程序员" class="dropdown-title"><span class="title">浪漫的程序员</span> <span class="arrow down"></span></button> <button type="button" aria-label="浪漫的程序员" class="mobile-dropdown-title"><span class="title">浪漫的程序员</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/doctest/funs/interview/" class="nav-link">
+  学弟学妹的面试宝典
+</a></li><li class="dropdown-item"><!----> <a href="/doctest/funs/heart/" class="nav-link">
+  心跳
+</a></li><li class="dropdown-item"><!----> <a href="/doctest/funs/buble/" class="nav-link">
+  气泡
+</a></li></ul></div></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="flow-UI" class="dropdown-title"><span class="title">flow-UI</span> <span class="arrow down"></span></button> <button type="button" aria-label="flow-UI" class="mobile-dropdown-title"><span class="title">flow-UI</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/doctest/flow/" class="nav-link router-link-active">
+  flow
+</a></li></ul></div></div> <!----></nav></div></header> <div class="sidebar-mask"></div> <aside class="sidebar"><nav class="nav-links"><div class="nav-item"><a href="/doctest/" class="nav-link">
+  首页
+</a></div><div class="nav-item"><a href="/doctest/guide/" class="nav-link">
+  表单表格组件
+</a></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="浪漫的程序员" class="dropdown-title"><span class="title">浪漫的程序员</span> <span class="arrow down"></span></button> <button type="button" aria-label="浪漫的程序员" class="mobile-dropdown-title"><span class="title">浪漫的程序员</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/doctest/funs/interview/" class="nav-link">
+  学弟学妹的面试宝典
+</a></li><li class="dropdown-item"><!----> <a href="/doctest/funs/heart/" class="nav-link">
+  心跳
+</a></li><li class="dropdown-item"><!----> <a href="/doctest/funs/buble/" class="nav-link">
+  气泡
+</a></li></ul></div></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="flow-UI" class="dropdown-title"><span class="title">flow-UI</span> <span class="arrow down"></span></button> <button type="button" aria-label="flow-UI" class="mobile-dropdown-title"><span class="title">flow-UI</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/doctest/flow/" class="nav-link router-link-active">
+  flow
+</a></li></ul></div></div> <!----></nav>  <ul class="sidebar-links"><li><a href="/doctest/flow/" aria-current="page" class="sidebar-link">引言</a></li><li><a href="/doctest/flow/button.html" class="sidebar-link">button</a></li><li><a href="/doctest/flow/viewport.html" class="sidebar-link">viewport</a></li><li><a href="/doctest/flow/dialog.html" class="sidebar-link">dialog</a></li><li><a href="/doctest/flow/area.html" class="sidebar-link">area</a></li><li><a href="/doctest/flow/toast.html" class="sidebar-link">toast</a></li><li><a href="/doctest/flow/badge.html" class="sidebar-link">badge</a></li><li><a href="/doctest/flow/flow-chart.html" class="sidebar-link">flow-chart</a></li></ul> </aside> <main class="page"> <div class="theme-default-content content__default"><h2 id="地区级联选择"><a href="#地区级联选择" class="header-anchor">#</a> 地区级联选择</h2> <p>参数</p> <table><thead><tr><th>参数</th> <th>说明</th> <th>类型</th> <th>可选值</th> <th>默认值</th></tr></thead> <tbody><tr><td>province</td> <td>省</td> <td>String, Number</td> <td>10000,北京市</td> <td></td></tr> <tr><td>city</td> <td>市</td> <td>String, Number</td> <td></td> <td></td></tr> <tr><td>area</td> <td>区</td> <td>String, Number</td> <td></td> <td></td></tr> <tr><td>hideArea</td> <td>隐藏区</td> <td>Boolean</td> <td></td> <td>false</td></tr> <tr><td>onlyProvince</td> <td>只显示省</td> <td>Boolean</td> <td></td> <td>false</td></tr> <tr><td>provinceDisabled</td> <td>置灰不可用</td> <td>Boolean</td> <td></td> <td>false</td></tr> <tr><td>cityDisabled</td> <td>置灰不可用</td> <td>Boolean</td> <td></td> <td>false</td></tr> <tr><td>areaDisabled</td> <td>置灰不可用</td> <td>Boolean</td> <td></td> <td>false</td></tr> <tr><td>custom</td> <td>选择器的自定义类名</td> <td>String</td> <td></td> <td></td></tr> <tr><td>resetBtn</td> <td>添加重置按钮</td> <td>Object</td> <td></td> <td></td></tr> <tr><td>placeholders</td> <td>自定义placeholders</td> <td>Object</td> <td></td> <td></td></tr></tbody></table> <div class="language- extra-class"><pre class="language-text"><code> resetBtn: {
+      type: Object,
+      default() {
+        return {
+          isShowBtn: false,   //是否显示重置按钮
+          cusClass: '',  //按钮自定义类
+          word: '' || '重置',  //按钮内的文字
+        };
+      },
+    },
+    placeholders: {
+      type: Object,
+      default() {
+        return {
+          province: '省',
+          city: '市',
+          area: '区',
+        };
+      },
+    },
+</code></pre></div></div> <footer class="page-edit"><!----> <!----></footer> <!----> </main></div><div class="global-ui"></div></div>
+    <script src="/doctest/assets/js/app.da059727.js" defer></script><script src="/doctest/assets/js/2.0f7fd3d6.js" defer></script><script src="/doctest/assets/js/29.94f0c4ed.js" defer></script>
   </body>
 </html>
