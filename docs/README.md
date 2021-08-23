@@ -1,7 +1,7 @@
 ---
 home: true
-heroImage: "https://www.vuepress.cn/hero.png"
-actionText: 快速上手 →
+heroImage: "img/logo.png"
+actionText: 快速了解 →
 actionLink: /flow/
 features:
 
@@ -10,7 +10,7 @@ features:
 - title: Vue驱动
   details: 享受 Vue + webpack 的开发体验，在 Markdown 中使用 Vue 组件，同时可以使用 Vue 来开发自定义主题。
 - title: 轻量简洁
-  details: 组件解耦,可针对组件单独下载,定制开发,面向多元化场景
+  details: 组件解耦,可针对组件单独下载,定制开发,面向多元化场景(开发中)
   footer: MIT Licensed | Copyright © 2018-present Evan You
 ---
 

@@ -1,12 +1,12 @@
 module.exports = {
   base: '/doctest/',
-  title: '基于vue2.xUi框架,面向pc,移动端的实用组件',
+  title: 'flow-ui',
   dest: './dist',    // 设置输出目录,
 
   repo: 'https://github.com/1211428762/doctest', // 添加 github 链接.
-  description: 'flow-Ui',
+  description: '基于vue2.x的奇思妙想组件库',
   themeConfig: {
-    logo: 'https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=1514571003,1845775142&fm=26&gp=0.jpg',
+    logo: 'img/logo.png',
     nav: [
       {
         text: '首页', link: "/"
@@ -19,7 +19,7 @@ module.exports = {
           { text: '气泡', link: '/funs/buble/' },
         ]
       },
-      { text: 'flow-UI', items: [{ text: 'flow', link: '/flow/' }] },
+      { text: 'flow-UI', items: [{ text: 'flow', link: '/flow/' }, { text: 'github', link: 'https://github.com/1211428762/doctest/tree/main/docs' }] },
     ],
     sidebar: {
       "/guide/": ["/guide/", {

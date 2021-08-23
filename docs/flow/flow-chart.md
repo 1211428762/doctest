@@ -14,7 +14,7 @@
 | height       | string | 流程图高度, 默认"600px"                          |
 
 示例
-
+::: details 查看代码
 ```js
  nodeItemList: [
         {
@@ -67,6 +67,7 @@ lineStyle:{
         dotted: false, // 是否是虚线
 }
 ```
+::: 
 
 
 
