@@ -1,0 +1,39 @@
+@import "./specical-effect.scss";
+// div.mask{
+//   background-image: url('/banner.png') !important;
+//   background-size: cover !important;
+// }
+:root {
+  --content-width: 1000px
+}
+
+main.page img {
+  border-radius: 10px;
+  margin: 10px auto;
+  display: block;
+  box-shadow: 0 0 5px 3px rgb(0 0 0 / 20%);
+  cursor: pointer;
+}
+
+.el-table__header,
+.el-table__body,
+.vxe-table--header,
+.vxe-table--body {
+  margin: 0 auto !important;
+}
+
+.home.project .hero img {
+  min-width: 200px;
+}
+
+:root {
+  --search-input-width: 8rem !important;
+  --search-result-width: 80% !important;
+}
+
+.suggestions {
+  position: fixed !important;
+  right: 2vw !important;
+  top: calc(var(--navbar-line-height) + 7px) !important;
+  max-width:   30% !important;
+}
